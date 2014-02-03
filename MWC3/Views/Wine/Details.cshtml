@@ -1,0 +1,109 @@
+﻿@model MWC3.Models.Wine
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Wine</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WineColor.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WineColor.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Grapes)
+        </dt>
+
+        <dd>
+            @foreach (var item in Model.Grapes)
+            {
+                @item.Name<br/>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFortified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFortified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSparkling)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsSparkling)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Business.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Business.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Region.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Region.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qualification.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qualification.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeStamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeStamp)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

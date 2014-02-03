@@ -1,0 +1,142 @@
+﻿@using Microsoft.Ajax.Utilities
+@model MWC3.Models.Wine
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Wine</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.WineColor.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.WineColorId, (SelectList)this.ViewData["WineColors"], string.Empty)
+                @Html.ValidationMessageFor(model => model.WineColorId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Country.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CountryId, (SelectList)this.ViewData["Countries"], string.Empty)
+                @Html.ValidationMessageFor(model => model.CountryId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Region.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RegionId", (SelectList)this.ViewData["Regions"], String.Empty)
+                @Html.ValidationMessageFor(model => model.RegionId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Qualification.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("QualificationId", (SelectList)this.ViewData["Qualifications"], String.Empty)
+                @Html.ValidationMessageFor(model => model.QualificationId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Business.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.BusinessId, (SelectList)this.ViewData["Businesses"], string.Empty)
+                @Html.ValidationMessageFor(model => model.BusinessId)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsSparkling, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsSparkling)
+                @Html.ValidationMessageFor(model => model.IsSparkling)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsFortified, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsFortified)
+                @Html.ValidationMessageFor(model => model.IsFortified)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.GrapeIds, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(model => model.GrapeIds, (MultiSelectList)this.ViewData["Grapes"], new { size = "8", @class = "selectlist multiselect" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript"src="~/Scripts/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap-multiselect.css" type="text/css"/>
+    <style type="text/css">
+        .selectlist {
+            min-width: 200px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function() {
+            $('.multiselect').multiselect({
+                maxHeight: 200,
+                enableCaseInsensitiveFiltering: true
+            });
+            $('#CountryId').change(function() {
+                var countryId = $('#CountryId').val();
+                $("#RegionId").clearSelect();
+                $.getJSON("/Region/GetRegions", { countryId: countryId }, function(data) {
+                    $("#RegionId").fillSelect(data);
+                    $("#RegionId").change();
+                });
+                $("#BusinessId").clearSelect();
+                $.getJSON("/Business/GetProducers", { countryId: countryId }, function(data) {
+                    $("#BusinessId").fillSelect(data);
+                });
+            });
+            $('#RegionId').change(function() {
+                var countryId = $('#CountryId').val();
+                var regionId = $('#RegionId').val();
+                $("#QualificationId").clearSelect();
+                $.getJSON("/Qualifiaction/GetQualifications", { countryId: countryId, RegionId: regionId }, function(data) {
+                    $("#QualificationId").fillSelect(data);
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,19 @@
+﻿Enable-Migrations -ContextTypeName [ContextClassName] (eenmalig)
+
+
+na aanpassing model:
+
+Add-Migration [AddMiddleName]
+Update-Database -Verbose
+
+
+
+onderstaande regel levert script voor database op
+
+Update-Database -Script -SourceMigration:$InitialDatabase
+
+//Roles.CreateRole("Administrator");
+            //Roles.CreateRole("User");
+
+            //Membership.CreateUser("robert", "mkhmeegls");
+            //Roles.AddUserToRole("robert", "Administrator");

@@ -1,0 +1,175 @@
+﻿@model MWC3.Models.Transaction
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Transaction</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div style="clear: both">
+            <div style="float: left; width: 100%; padding: 10px;">
+                <fieldset style="background-color: gainsboro; ">
+                    <div style="float: left; width: 50%;">
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.WineId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @*@Html.DropDownList("WineId", String.Empty)
+                                @Html.ValidationMessageFor(model => model.WineId)*@
+                                <input type="text" id="WineId" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.Year, (SelectList)this.ViewData["Years"])
+                                @Html.ValidationMessageFor(model => model.Year)
+                            </div>
+                        </div>
+                    </div>
+                    <div style="float: right; width: 50%; text-align: left; background-color: salmon;">
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Wine</label>
+                            <div class="col-md-10">
+                                Wine Name
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Producer</label>
+                            <div class="col-md-10">
+                                Wine Name
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset style="background-color: dodgerblue; ">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TransactionTypeId, "TransactionTypeId", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.TransactionTypeId, (SelectList)this.ViewData["TransactionTypes"])
+                            @Html.ValidationMessageFor(model => model.TransactionTypeId)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BottleTypeId, "BottleTypeId", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.BottleTypeId, (SelectList)this.ViewData["BottleTypes"])
+                            @Html.ValidationMessageFor(model => model.BottleTypeId)
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Quantity)
+                            @Html.ValidationMessageFor(model => model.Quantity)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Price)
+                            @Html.ValidationMessageFor(model => model.Price)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Date, new { @class = "datepicker" })
+                            @Html.ValidationMessageFor(model => model.Date)
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset style="background-color: gold; ">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BusinessId, "BusinessId", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("BusinessId", String.Empty)
+                            @Html.ValidationMessageFor(model => model.BusinessId)
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+            <div style="float: right; width: 0%; background-color: gold; padding: 10px;">
+
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap-datepicker.css" type="text/css" />
+    <script type="text/javascript">
+        var wines;
+        var map;
+        $(function () {
+            $('.datepicker').datepicker();
+            $('#WineId').typeahead({
+                source: function (query, process) {
+                    wines = [];
+                    map = {};
+
+                    var data = [
+                        { "key": "1", "value": "wine1" },
+                        { "key": "2", "value": "wine2" },
+                        { "key": "3", "value": "wine3" },
+                        { "key": "4", "value": "wine4" },
+                        { "key": "5", "value": "wine5" }
+                    ];
+
+                    $.each(data, function (i, wine) {
+                        map[wine.value] = wine;
+                        wines.push(wine.value);
+                    });
+
+                    process(wines);
+                },
+                updater: function (item) {
+                    // implementation
+                },
+                matcher: function (item) {
+                    if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1)
+                    {
+                        return true;
+                    }
+                },
+                sorter: function (items) {
+                    // implementation
+                },
+                highlighter: function (item) {
+                    // implementation
+                },
+            });
+        });
+    </script>
+}

@@ -1,0 +1,70 @@
+﻿@using System.Threading
+@{
+    MWC3.Helpers.LanguageHelper.SetCurrentCulture(this.Context);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/site")
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("My Wine Cellar", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("TransactionTypes", "Index", "TransactionTypes")</li>
+                            <li>@Html.ActionLink("Grapes", "Index", "Grape")</li>
+                            <li>@Html.ActionLink("Regions", "Index", "Region")</li>
+                            <li>@Html.ActionLink("Countries", "Index", "Country")</li>
+                            <li>@Html.ActionLink("Bottles", "Index", "BottleType")</li>
+                            <li>@Html.ActionLink("Qualifications", "Index", "Qualifiaction")</li>
+                            <li>@Html.ActionLink("Businesses", "Index", "Business")</li>
+                            <li>@Html.ActionLink("Wines", "Index", "Wine")</li>
+                            <li>@Html.ActionLink("Transactions", "Index", "Transaction")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Languages<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Eng", "Index", "Language", new { lc = "en", cc = "en-US" }, null)</li>
+                            <li>@Html.ActionLink("Ned", "Index", "Language", new { lc = "nl", cc = "nl-NL" }, null)</li>
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="clear: both">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My Wine Cellar Application (@Thread.CurrentThread.CurrentCulture)</p>
+        </footer>
+    </div>
+
+</body>
+</html>
