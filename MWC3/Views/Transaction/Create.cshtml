@@ -25,7 +25,7 @@
                             @Html.LabelFor(model => model.WineId, new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @*@Html.DropDownList("WineId", String.Empty)
-                                @Html.ValidationMessageFor(model => model.WineId)*@
+                                    @Html.ValidationMessageFor(model => model.WineId)*@
                                 <input type="text" id="WineId" />
                             </div>
                         </div>
@@ -128,48 +128,33 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.autocomplete.js"></script>
     <link rel="stylesheet" href="~/Content/bootstrap-datepicker.css" type="text/css" />
     <script type="text/javascript">
-        var wines;
-        var map;
-        $(function () {
-            $('.datepicker').datepicker();
-            $('#WineId').typeahead({
-                source: function (query, process) {
-                    wines = [];
-                    map = {};
+        var wines = [];
+        $(function() {
+            $.getJSON("/search/wine", function(receivedData) {
+                $.each(receivedData, function(i, item) {
+                    console.log("value = " + item.Value);
+                    console.log("key =" + item.Key);
+                    // wines.push({ value: item.Value, data: item.Key });
+                });
 
-                    var data = [
-                        { "key": "1", "value": "wine1" },
-                        { "key": "2", "value": "wine2" },
-                        { "key": "3", "value": "wine3" },
-                        { "key": "4", "value": "wine4" },
-                        { "key": "5", "value": "wine5" }
-                    ];
 
-                    $.each(data, function (i, wine) {
-                        map[wine.value] = wine;
-                        wines.push(wine.value);
-                    });
-
-                    process(wines);
-                },
-                updater: function (item) {
-                    // implementation
-                },
-                matcher: function (item) {
-                    if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1)
-                    {
-                        return true;
-                    }
-                },
-                sorter: function (items) {
-                    // implementation
-                },
-                highlighter: function (item) {
-                    // implementation
-                },
+                wines = $.map(receivedData, function (value, key) { return { value: value.Value, data: value.Key }; });
+                SetupWineAutoSuggets();
             });
+
         });
+
+        function SetupWineAutoSuggets() {
+            // var winesArray = $.map(wines, function (value, key) { return { value: value, data: key }; });
+            $('#WineId').autocomplete({
+                lookup: wines,
+                onSelect: function(suggestion) {
+                    alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                }
+            });
+        }
     </script>
 }

@@ -24,7 +24,8 @@
         public DbSet<Business> Businesses { get; set; }
         public DbSet<WineColor> WineColors { get; set; }
         public DbSet<Wine> Wines { get; set; }
-
+        public DbSet<TransactionType> TransactionTypes { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -52,9 +53,7 @@
 
         }
 
-        public System.Data.Entity.DbSet<MWC3.Models.TransactionType> TransactionTypes { get; set; }
 
-        public System.Data.Entity.DbSet<MWC3.Models.Transaction> Transactions { get; set; }
 
 
     }
