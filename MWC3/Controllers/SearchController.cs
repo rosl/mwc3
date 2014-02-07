@@ -8,6 +8,35 @@
         //
         // GET: /Search/
         [HttpGet]
+        [Route("search/distributor")]
+        public JsonResult Distributor()
+        {
+            var list = this.Db.Businesses.Where(b=>b.IsDistributor).ToList();
+            return this.Json(list.Select(l => new { Key = l.Id, Value = l.Name + " - " + l.City }), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Route("search/distributor/{id}")]
+        public JsonResult Distributor(int id)
+        {
+            var bus = this.Db.Businesses.Find(id);
+            if (bus != null && bus.IsDistributor)
+            {
+                return
+                    this.Json(
+                        new
+                        {
+                            id = bus.Id,
+                            name = bus.Name,
+                            address = bus.Address,
+                            city = bus.City
+                        },
+                        JsonRequestBehavior.AllowGet);
+            }
+            return this.Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         [Route("search/wine")]
         public JsonResult Wine()
         {

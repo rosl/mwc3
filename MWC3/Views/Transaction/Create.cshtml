@@ -115,7 +115,7 @@
             <fieldset>
                 <legend>Distributor</legend>
                 <div class="form-group">
-                    @Html.HiddenFor(model=>model.BusinessId)
+                    @Html.HiddenFor(model => model.BusinessId)
                     <label class="control-label col-md-2" for="SearchDistributor">Search</label>
                     <div class="col-md-10">
                         <input type="text" id="SearchDistributor" data-watermark="search at name" onfocus="this.value=''" />
@@ -146,37 +146,6 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="~/Scripts/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="~/Scripts/Transactions/Create.js"></script>
     <link rel="stylesheet" href="~/Content/bootstrap-datepicker.css" type="text/css" />
-    <script type="text/javascript">
-        $(function() {
-            $('#wineForm').hide();
-            useWatermark();
-            $('#WineId').change(function () {
-                $('#SearchWine').blur();
-                $('#wineForm').show();
-                useWatermark();
-                $.getJSON("/search/wine/" + $('#WineId').val(), function(receivedData) {
-                    //bind data to form
-                    $('#wineName').text(receivedData.name);
-                    $('#isFortified').text(receivedData.isFortified);
-                    $('#isSparkling').text(receivedData.isSparkling);
-                    $('#wineColor').text(receivedData.color);
-                    $('#grapes').text($.map(receivedData.grapes, function (value) { return value; }));
-                    $('#producer').text(receivedData.producer.Name + ", " + receivedData.producer.City);
-                });
-            });
-
-            $.getJSON("/search/wine", function(receivedData) {
-                var wines = $.map(receivedData, function(value) { return { value: value.Value, data: value.Key }; });
-                $('#SearchWine').autocomplete({
-                    lookup: wines,
-                    onSelect: function(suggestion) {
-                        $('#WineId').val(suggestion.data);
-                        $('#WineId').change();
-                        // alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
-                    }
-                });
-            });
-        });
-    </script>
 }

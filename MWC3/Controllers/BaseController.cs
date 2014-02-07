@@ -22,6 +22,7 @@ namespace MWC3.Controllers
 
         public BaseController()
         {
+            // this.PopulateUserId();
         }
 
         public void PopulateUserName()
@@ -42,7 +43,7 @@ namespace MWC3.Controllers
         public string GetUserId()
         {
             var userId = string.Empty;
-            if (User.Identity.IsAuthenticated)
+            if (User != null && User.Identity.IsAuthenticated)
             {
                 var userName = this.GetUserName();
                 var user = Db.Users.FirstOrDefault(x => userName != null && x.UserName == userName);
