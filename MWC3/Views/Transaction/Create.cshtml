@@ -16,107 +16,124 @@
         <hr />
         @Html.ValidationSummary(true)
 
-        <div style="clear: both">
-            <div style="float: left; width: 100%; padding: 10px;">
-                <fieldset style="background-color: gainsboro; ">
-                    <div style="float: left; width: 50%;">
-                        <div class="form-group">
-
-                            @Html.LabelFor(model => model.WineId, new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @*@Html.DropDownList("WineId", String.Empty)
-                                    @Html.ValidationMessageFor(model => model.WineId)*@
-                                <input type="text" id="WineId" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.Year, (SelectList)this.ViewData["Years"])
-                                @Html.ValidationMessageFor(model => model.Year)
-                            </div>
-                        </div>
+        <div style="background-color: salmon;">
+            <fieldset id="wineFieldset">
+                <legend>Wine</legend>
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.WineId)
+                    <label class="control-label col-md-2" for="SearchWine">Search</label>
+                    <div class="col-md-10">
+                        <input type="text" id="SearchWine" data-watermark="search at wine, producer, location" onfocus="this.value=''" />
                     </div>
-                    <div style="float: right; width: 50%; text-align: left; background-color: salmon;">
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Wine</label>
-                            <div class="col-md-10">
-                                Wine Name
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Producer</label>
-                            <div class="col-md-10">
-                                Wine Name
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset style="background-color: dodgerblue; ">
+                </div>
+                <div id="wineForm">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.TransactionTypeId, "TransactionTypeId", new { @class = "control-label col-md-2" })
+                        <label for="wineName" class="control-label col-md-2">Name</label>
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.TransactionTypeId, (SelectList)this.ViewData["TransactionTypes"])
-                            @Html.ValidationMessageFor(model => model.TransactionTypeId)
+                            <span id="wineName"></span>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        @Html.LabelFor(model => model.BottleTypeId, "BottleTypeId", new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-2">Type</label>
                         <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.BottleTypeId, (SelectList)this.ViewData["BottleTypes"])
-                            @Html.ValidationMessageFor(model => model.BottleTypeId)
+                            Colour <span id="wineColor"></span> | Sparkling? <span id="isSparkling"></span> | Fortified? <span id="isFortified"></span>
                         </div>
                     </div>
-
-
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
+                        <label for="grapes" class="control-label col-md-2">Grapes</label>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Quantity)
-                            @Html.ValidationMessageFor(model => model.Quantity)
+                            <span id="grapes"></span>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+                        <label for="producer" class="control-label col-md-2">Producer</label>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Price)
-                            @Html.ValidationMessageFor(model => model.Price)
+                            <span id="producer"></span>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Date, new { @class = "datepicker" })
-                            @Html.ValidationMessageFor(model => model.Date)
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset style="background-color: gold; ">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.BusinessId, "BusinessId", new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownList("BusinessId", String.Empty)
-                            @Html.ValidationMessageFor(model => model.BusinessId)
-                        </div>
-                    </div>
-                </fieldset>
-
-            </div>
-            <div style="float: right; width: 0%; background-color: gold; padding: 10px;">
-
-
-            </div>
+                </div>
+            </fieldset>
         </div>
+        <div style="background-color: darkviolet; ">
+            <fieldset>
+                <legend>Vintage</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Year, (SelectList)this.ViewData["Years"])
+                        @Html.ValidationMessageFor(model => model.Year)
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div style="background-color: dodgerblue; ">
+            <fieldset>
+                <legend>Transaction</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TransactionTypeId, "TransactionTypeId", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.TransactionTypeId, (SelectList)this.ViewData["TransactionTypes"])
+                        @Html.ValidationMessageFor(model => model.TransactionTypeId)
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BottleTypeId, "BottleTypeId", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.BottleTypeId, (SelectList)this.ViewData["BottleTypes"])
+                        @Html.ValidationMessageFor(model => model.BottleTypeId)
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Quantity)
+                        @Html.ValidationMessageFor(model => model.Quantity)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Price)
+                        @Html.ValidationMessageFor(model => model.Price)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Date, new { @class = "datepicker" })
+                        @Html.ValidationMessageFor(model => model.Date)
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div style="background-color: gold; ">
+            <fieldset>
+                <legend>Distributor</legend>
+                <div class="form-group">
+                    @Html.HiddenFor(model=>model.BusinessId)
+                    <label class="control-label col-md-2" for="SearchDistributor">Search</label>
+                    <div class="col-md-10">
+                        <input type="text" id="SearchDistributor" data-watermark="search at name" onfocus="this.value=''" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="distributor" class="control-label col-md-2">Distributor</label>
+                    <div class="col-md-10">
+                        <span id="distributor"></span>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
 }
@@ -131,30 +148,35 @@
     <script type="text/javascript" src="~/Scripts/jquery.autocomplete.js"></script>
     <link rel="stylesheet" href="~/Content/bootstrap-datepicker.css" type="text/css" />
     <script type="text/javascript">
-        var wines = [];
         $(function() {
-            $.getJSON("/search/wine", function(receivedData) {
-                $.each(receivedData, function(i, item) {
-                    console.log("value = " + item.Value);
-                    console.log("key =" + item.Key);
-                    // wines.push({ value: item.Value, data: item.Key });
+            $('#wineForm').hide();
+            useWatermark();
+            $('#WineId').change(function () {
+                $('#SearchWine').blur();
+                $('#wineForm').show();
+                useWatermark();
+                $.getJSON("/search/wine/" + $('#WineId').val(), function(receivedData) {
+                    //bind data to form
+                    $('#wineName').text(receivedData.name);
+                    $('#isFortified').text(receivedData.isFortified);
+                    $('#isSparkling').text(receivedData.isSparkling);
+                    $('#wineColor').text(receivedData.color);
+                    $('#grapes').text($.map(receivedData.grapes, function (value) { return value; }));
+                    $('#producer').text(receivedData.producer.Name + ", " + receivedData.producer.City);
                 });
-
-
-                wines = $.map(receivedData, function (value, key) { return { value: value.Value, data: value.Key }; });
-                SetupWineAutoSuggets();
             });
 
+            $.getJSON("/search/wine", function(receivedData) {
+                var wines = $.map(receivedData, function(value) { return { value: value.Value, data: value.Key }; });
+                $('#SearchWine').autocomplete({
+                    lookup: wines,
+                    onSelect: function(suggestion) {
+                        $('#WineId').val(suggestion.data);
+                        $('#WineId').change();
+                        // alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                    }
+                });
+            });
         });
-
-        function SetupWineAutoSuggets() {
-            // var winesArray = $.map(wines, function (value, key) { return { value: value, data: key }; });
-            $('#WineId').autocomplete({
-                lookup: wines,
-                onSelect: function(suggestion) {
-                    alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
-                }
-            });
-        }
     </script>
 }

@@ -10,10 +10,9 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+input, select, textarea {
+    width: 100%;
+    max-width: 400px;
 }
 
 /* styles for validation helpers */
@@ -64,4 +63,9 @@ input[type="checkbox"].input-validation-error {
 .autocomplete-suggestions strong {
     font-weight: normal;
     color: #3399FF;
+}
+
+fieldset {
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
 }

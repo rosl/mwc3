@@ -31,7 +31,9 @@
                             name = wine.Name,
                             isFortified = wine.IsFortified,
                             isSparkling = wine.IsSparkling,
-                            producer = wine.Business
+                            producer = wine.Business,
+                            grapes = wine.Grapes.Select(g => g.Name),
+                            color = wine.WineColor.Name
                         },
                         JsonRequestBehavior.AllowGet);
             }
@@ -39,12 +41,5 @@
             return this.Json(null, JsonRequestBehavior.AllowGet);
 
         }
-
-        //public JsonResult Wine(string searchText)
-        //{
-        //    var list = this.Db.Wines.Where(w => w.Name.Contains(searchText) || (w.Business.Name.Contains(searchText) && w.Business.IsProducer)).ToList();
-        //    return this.Json(list.Select(l => new { Selected = false, Value = l.Id, Text = l.Name + " - " + l.Business.Name }), JsonRequestBehavior.AllowGet);
-        //}
-
     }
 }
