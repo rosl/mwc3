@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Globalization;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
@@ -11,10 +12,22 @@
     public class QualifiactionController : BaseController
     {
         // GET: /Qualifiaction/
+        [Route("Qualifiaction")]
+        [Route("Qualifiaction/Index")]
         public ActionResult Index()
         {
             // var qualifications = db.Qualifications.Include(q => q.Country).Include(q => q.Region);
+            this.PopulateCountryList();
             var qualifications = this.Db.Qualifications;
+            return View(qualifications.ToList());
+        }
+        [Route("Qualifiaction/{id}")]
+        public ActionResult Index(int id)
+        {
+            // var qualifications = db.Qualifications.Include(q => q.Country).Include(q => q.Region);
+            this.PopulateCountryList(id);
+            // ViewBag["countryId"] = id;
+            var qualifications = this.Db.Qualifications.Where(x=>x.CountryId == id);
             return View(qualifications.ToList());
         }
 
@@ -34,6 +47,8 @@
         }
 
         // GET: /Qualifiaction/Create
+        [HttpGet]
+        [Route("Qualifiaction/Create")]
         public ActionResult Create()
         {
             var qualification = new Qualification { AddedBy = this.GetUserName(), Timestamp = DateTime.Now };
@@ -46,8 +61,9 @@
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("Qualifiaction/Create")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ShortName,CountryId,RegionId,AddedBy,Timestamp")] Qualification qualification)
+        public ActionResult Create([Bind(Include = "Id,Name,ShortName,CountryId,RegionId")] Qualification qualification)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +72,7 @@
 
                 this.Db.Qualifications.Add(qualification);
                 this.Db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(qualification.CountryId.ToString(CultureInfo.InvariantCulture));
             }
 
             ViewBag.CountryId = new SelectList(this.Db.Countries, "Id", "Name", qualification.CountryId);
@@ -65,6 +81,8 @@
         }
 
         // GET: /Qualifiaction/Edit/5
+        [HttpGet]
+        [Route("Qualifiaction/Edit/{id}")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,8 +104,9 @@
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("Qualifiaction/Edit/{id}")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ShortName,CountryId,RegionId,AddedBy,Timestamp")] Qualification qualification)
+        public ActionResult Edit([Bind(Include = "Id,Name,ShortName,CountryId,RegionId")] Qualification qualification)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +115,7 @@
 
                 this.Db.Entry(qualification).State = EntityState.Modified;
                 this.Db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(qualification.CountryId.ToString(CultureInfo.InvariantCulture));
             }
             ViewBag.CountryId = new SelectList(this.Db.Countries, "Id", "Name", qualification.CountryId);
             ViewBag.RegionId = new SelectList(this.Db.Regions, "Id", "Name", qualification.RegionId);

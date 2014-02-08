@@ -73,7 +73,8 @@ namespace MWC3.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CountryId = new SelectList(this.Db.Countries, "Id", "Name", region.CountryId);
+
+            this.PopulateCountryList();
             return View(region);
         }
 

@@ -23,6 +23,7 @@
         public int BusinessId { get; set; }
         public bool IsSparkling { get; set; }
         public bool IsFortified { get; set; }
+        public bool IsSweet { get; set; }
         public string AddedBy { get; set; }
         public DateTime TimeStamp { get; set; }
         [NotMapped]

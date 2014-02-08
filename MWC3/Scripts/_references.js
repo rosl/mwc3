@@ -61,3 +61,4 @@
 /// <reference path="jquery.validate.unobtrusive.js" />
 /// <reference path="jquery.autocomplete.js" />
 /// <reference path="transactions/create.js" />
+/// <reference path="qualifications/index.js" />
