@@ -37,7 +37,7 @@
         public ActionResult Create()
         {
             var qualification = new Qualification { AddedBy = this.GetUserName(), Timestamp = DateTime.Now };
-            ViewBag.RegionId = new SelectList( new List<string>());
+            ViewBag.RegionId = new SelectList(new List<string>());
             this.PopulateCountryList();
             return View(qualification);
         }
@@ -78,7 +78,7 @@
             }
             // ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", qualification.CountryId);
             this.PopulateCountryList();
-            ViewBag.RegionId = new SelectList(this.Db.Regions.Where(r => r.CountryId == qualification.CountryId), "Id", "Name", qualification.RegionId);
+            ViewBag.RegionId = new SelectList(this.Db.Regions.Where(r => r.CountryId == qualification.CountryId).OrderBy(r => r.Name), "Id", "Name", qualification.RegionId);
             return View(qualification);
         }
 
@@ -148,10 +148,10 @@
             }
             else
             {
-                list = this.Db.Qualifications.Where(r => r.CountryId == countryId && r.RegionId == regionId).OrderBy(r => r.ShortName).ToList(); 
+                list = this.Db.Qualifications.Where(r => r.CountryId == countryId && r.RegionId == regionId).OrderBy(r => r.ShortName).ToList();
             }
 
-            return this.Json(list.Select(l => new {Selected = false, Value = l.Id, Text = l.Name}), JsonRequestBehavior.AllowGet);
+            return this.Json(list.Select(l => new { Selected = false, Value = l.Id, Text = l.Name }), JsonRequestBehavior.AllowGet);
         }
     }
 }

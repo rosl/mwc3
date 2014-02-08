@@ -82,7 +82,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GrapeIds, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ListBoxFor(model => model.GrapeIds, (MultiSelectList)this.ViewData["Grapes"], new { size = "8", @class = "selectlist multiselect" })
+                @Html.ListBoxFor(model => model.GrapeIds, (MultiSelectList)this.ViewData["Grapes"], new
+                                                                                                    {
+                                                                                                        size = "5", 
+                                                                                                        @class = "selectlist multiselect"
+                                                                                                    })
             </div>
         </div>
 
@@ -106,8 +110,8 @@
     <script type="text/javascript"src="~/Scripts/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="~/Content/bootstrap-multiselect.css" type="text/css"/>
     <style type="text/css">
-        .selectlist {
-            min-width: 200px;
+        .multiselect {
+            min-width: 400px;
         }
     </style>
 

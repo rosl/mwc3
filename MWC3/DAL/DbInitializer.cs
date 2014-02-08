@@ -13,12 +13,12 @@
     {
         protected override void Seed(ApplicationDbContext context)
         {
-            AddCountries(context);
-            AddLanguageInfo(context);
-            AddRegions(context);
-            AddGrapes(context);
-            AddGrapeColors(context);
-            AddBottleTypes(context);
+            //AddCountries(context);
+            //AddLanguageInfo(context);
+            //AddRegions(context);
+            //AddGrapes(context);
+            //AddGrapeColors(context);
+            //AddBottleTypes(context);
 
             //Roles.CreateRole("Administrator");
             //Roles.CreateRole("User");

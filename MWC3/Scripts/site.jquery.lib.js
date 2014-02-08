@@ -42,3 +42,13 @@ useWatermark = function () {
         });
     });
 };
+
+var isInIframe = (window.location != window.parent.location) ? true : false;
+
+$(document).ready(function () {
+    if (isInIframe) {
+        $('.navbar').hide();
+        $('h4').hide();
+        $('h2').hide();
+    }
+});

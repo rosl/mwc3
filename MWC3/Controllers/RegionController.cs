@@ -6,6 +6,7 @@ using MWC3.Models;
 
 namespace MWC3.Controllers
 {
+    using System;
     using System.Security.Cryptography.X509Certificates;
 
     public class RegionController : BaseController
@@ -44,10 +45,13 @@ namespace MWC3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,AddedBy,Timestamp,CountryId")] Region region)
+        public ActionResult Create([Bind(Include = "Id,Name,CountryId")] Region region)
         {
             if (ModelState.IsValid)
             {
+                region.AddedBy = this.GetUserName();
+                region.Timestamp = DateTime.Now;
+
                 this.Db.Regions.Add(region);
                 this.Db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,10 +82,13 @@ namespace MWC3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,AddedBy,Timestamp,CountryId")] Region region)
+        public ActionResult Edit([Bind(Include = "Id,Name,CountryId")] Region region)
         {
             if (ModelState.IsValid)
             {
+                region.AddedBy = this.GetUserName();
+                region.Timestamp = DateTime.Now;
+
                 this.Db.Entry(region).State = EntityState.Modified;
                 this.Db.SaveChanges();
                 return RedirectToAction("Index");

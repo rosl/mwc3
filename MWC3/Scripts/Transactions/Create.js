@@ -21,7 +21,7 @@
     LoadDistributor: function () {
         $.getJSON("/search/distributor/" + $('#BusinessId').val(), function (receivedData) {
             //bind data to form
-            $('#distributor').text(receivedData.name + ", " + receivedData.address +  ", " +  receivedData.city);
+            $('#distributor').text(receivedData.name + ", " + receivedData.address + ", " + receivedData.city);
         });
 
     },
@@ -62,10 +62,23 @@
             Create.LoadDistributor();
         });
     },
+    SetupClickBehavior: function () {
+        $('#btAddWine').click(function () {
+            alert('button clicked');
+            $('#myModal').modal('show');
+            var frameSrc = "/Wine/Create";
+                //$('#myModal').on('show', function () {
+                //    alert('show iframe');
+                //    $('iframe').attr("src", "/Wine/Create");
+                //});
+            //$('#myModal').modal('show');
+        });
+    },
     Initialize: function () {
         useWatermark();
         Create.HideWineForm();
         Create.SetupChangeBehavior();
+        Create.SetupClickBehavior();
         Create.LoadDistributors();
         Create.LoadWines();
     }

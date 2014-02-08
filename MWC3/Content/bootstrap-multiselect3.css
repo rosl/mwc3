@@ -1,4 +1,4 @@
-.multiselect-container {
+﻿.multiselect-container {
     position: absolute;
     list-style-type: none;
     margin: 0;
@@ -37,7 +37,6 @@
 
             .multiselect-container > li > a > label > input[type="checkbox"] {
                 margin-bottom: 5px;
-                width: 20px;
             }
 
 .btn-group > .btn-group:nth-child(2) > .multiselect.btn {

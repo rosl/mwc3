@@ -24,6 +24,7 @@
                     <label class="control-label col-md-2" for="SearchWine">Search</label>
                     <div class="col-md-10">
                         <input type="text" id="SearchWine" data-watermark="search at wine, producer, location" onfocus="this.value=''" />
+                        <button id="btAddWine" type="button">Add Wine</button>
                     </div>
                 </div>
                 <div id="wineForm">
@@ -141,6 +142,25 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Create Wine</h4>
+            </div>
+            <div class="modal-body">
+                <iframe src="/Wine/Create" style="zoom:0.60; width: 100%;" height="400" frameborder="0"></iframe>
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>*@
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
