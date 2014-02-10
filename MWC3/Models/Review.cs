@@ -16,5 +16,7 @@ namespace MWC3.Models
         public double Score { get; set; }
 
         public int ReviewTypeId { get; set; }
+
+        public virtual ReviewType ReviewType { get; set; }
     }
 }

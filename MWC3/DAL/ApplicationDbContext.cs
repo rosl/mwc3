@@ -26,6 +26,8 @@
         public DbSet<Wine> Wines { get; set; }
         public DbSet<TransactionType> TransactionTypes { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<ReviewType> ReviewTypes { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
