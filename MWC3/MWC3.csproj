@@ -170,9 +170,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -284,6 +281,10 @@
     <Compile Include="Migrations\201402081509460_AddedIsSweetToWine.Designer.cs">
       <DependentUpon>201402081509460_AddedIsSweetToWine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201402101035025_AddREview.cs" />
+    <Compile Include="Migrations\201402101035025_AddREview.Designer.cs">
+      <DependentUpon>201402101035025_AddREview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BottleType.cs" />
@@ -295,6 +296,8 @@
     <Compile Include="Models\LanguageInfo.cs" />
     <Compile Include="Models\Qualification.cs" />
     <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\ReviewType.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TransactionType.cs" />
     <Compile Include="Models\Wine.cs" />
@@ -530,6 +533,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201402081509460_AddedIsSweetToWine.resx">
       <DependentUpon>201402081509460_AddedIsSweetToWine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402101035025_AddREview.resx">
+      <DependentUpon>201402101035025_AddREview.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
