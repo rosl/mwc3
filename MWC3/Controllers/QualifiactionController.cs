@@ -157,6 +157,7 @@
             base.Dispose(disposing);
         }
 
+        [Route("Qualifiaction/GetQualifications")]
         public JsonResult GetQualifications(int countryId, int? regionId)
         {
             List<Qualification> list;
@@ -167,7 +168,10 @@
             }
             else
             {
-                list = this.Db.Qualifications.Where(r => r.CountryId == countryId && r.RegionId == regionId).OrderBy(r => r.ShortName).ToList();
+                var list1 = this.Db.Qualifications.Where(r => r.CountryId == countryId && r.RegionId == regionId).OrderBy(r => r.ShortName).ToList();
+                var list2 = this.Db.Qualifications.Where(d => d.CountryId == countryId && d.RegionId == 0).OrderBy(d => d.ShortName).ToList();
+                var list3 = this.Db.Qualifications.Where(d => d.CountryId == countryId && d.RegionId == null).OrderBy(d => d.ShortName).ToList();
+                list = list1.Union(list2).Union(list3).OrderBy(r=>r.ShortName).ToList();
             }
 
             return this.Json(list.Select(l => new { Selected = false, Value = l.Id, Text = l.Name }), JsonRequestBehavior.AllowGet);

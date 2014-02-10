@@ -43,7 +43,7 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Email,Url,Phone,IsDistributor,IsProducer,Address,PostalCode,City,CountryId,AddedBy,Timestamp,Owner")] Business business)
+        public ActionResult Create([Bind(Include = "Id,Name,Email,Url,Phone,IsDistributor,IsProducer,Address,PostalCode,City,CountryId,Owner")] Business business)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Email,Url,Phone,IsDistributor,IsProducer,Address,PostalCode,City,CountryId,AddedBy,Timestamp,Owner")] Business business)
+        public ActionResult Edit([Bind(Include = "Id,Name,Email,Url,Phone,IsDistributor,IsProducer,Address,PostalCode,City,CountryId,Owner")] Business business)
         {
             if (ModelState.IsValid)
             {
