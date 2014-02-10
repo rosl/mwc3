@@ -124,13 +124,15 @@
         public JsonResult GetProducers(int countryId)
         {
             var list = this.Db.Businesses.Where(b => b.CountryId == countryId && b.IsProducer).ToList();
-            return this.Json(list.Select(l => new { Selected = false, Value = l.Id, Text = l.Name + " - " + l.City }), JsonRequestBehavior.AllowGet);
+            var selectList = list.Select(l => new { Selected = false, Value = l.Id, Text = l.Name }).ToList();
+            selectList.Add(new { Selected = false, Value = 0, Text = "" });
+            return this.Json(selectList.OrderBy(x => x.Text), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetDistributors(int countryId)
         {
             var list = this.Db.Businesses.Where(b => b.CountryId == countryId && b.IsDistributor);
-            return this.Json(list.Select(l => new { Selected = false, Value = l.Id, Text = l.Name }), JsonRequestBehavior.AllowGet);
+            return this.Json(list.Select(l => new { Selected = false, Value = l.Id, Text = l.Name + " - " + l.City }), JsonRequestBehavior.AllowGet);
         }
 
 
