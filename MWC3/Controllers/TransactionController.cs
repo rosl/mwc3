@@ -37,8 +37,12 @@ namespace MWC3.Controllers
         }
 
         // GET: /Transaction/Create
-        public ActionResult Create()
+        public ActionResult Create(bool? dir)
         {
+            bool goingIn = dir != false;
+
+            ViewData["GoingIn"] = goingIn;
+
             // set default values
             var transaction = new Transaction
                               {
@@ -51,7 +55,7 @@ namespace MWC3.Controllers
             ViewBag.WineId = new SelectList(Db.Wines, "Id", "Name");
 
             this.PopulateBottleTypeList();
-            this.PopulateTransactionTypesList();
+            this.PopulateTransactionTypesList(goingIn);
             this.PopulateYearList();
 
             return View(transaction);

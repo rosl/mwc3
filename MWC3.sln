@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MWC3.Tests", "MWC3.Tests\MW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMvc1", "TestMvc1\TestMvc1.csproj", "{F59D65A3-9C89-4237-A9B7-80919F9C41BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabrik.Common.Web", "..\Fabrik.Common\src\Fabrik.Common.Web\Fabrik.Common.Web.csproj", "{9E630EBC-9EC3-4AF5-B10E-FB61EA102431}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F59D65A3-9C89-4237-A9B7-80919F9C41BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F59D65A3-9C89-4237-A9B7-80919F9C41BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F59D65A3-9C89-4237-A9B7-80919F9C41BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E630EBC-9EC3-4AF5-B10E-FB61EA102431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E630EBC-9EC3-4AF5-B10E-FB61EA102431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E630EBC-9EC3-4AF5-B10E-FB61EA102431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E630EBC-9EC3-4AF5-B10E-FB61EA102431}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -553,6 +553,12 @@
       <DependentUpon>201402101455189_ChangeUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Fabrik.Common\src\Fabrik.Common.Web\Fabrik.Common.Web.csproj">
+      <Project>{9e630ebc-9ec3-4af5-b10e-fb61ea102431}</Project>
+      <Name>Fabrik.Common.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

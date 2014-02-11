@@ -28,7 +28,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.WineColor.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.WineColorId, (SelectList)this.ViewData["WineColors"])
+                @foreach (var a in (SelectList)this.ViewData["WineColors"])
+                {
+                    @Html.RadioButtonFor(b => b.WineColorId, a.Value, new { @class = "radiofor" })  @a.Text
+                }
+                @*@Html.DropDownListFor(model => model.WineColorId, (SelectList)this.ViewData["WineColors"])*@
                 @Html.ValidationMessageFor(model => model.WineColorId)
             </div>
         </div>

@@ -15,6 +15,52 @@
         <h4>Transaction</h4>
         <hr />
         @Html.ValidationSummary(true)
+        @Html.Hidden("goingIn", (bool)ViewData["GoingIn"])
+        <div style="background-color: dodgerblue; ">
+            <fieldset>
+                <legend>Transaction</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TransactionTypeId, "TransactionTypeId", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.TransactionTypeId, (SelectList)this.ViewData["TransactionTypes"])
+                        @Html.ValidationMessageFor(model => model.TransactionTypeId)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BottleTypeId, "BottleTypeId", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.BottleTypeId, (SelectList)this.ViewData["BottleTypes"])
+                        @Html.ValidationMessageFor(model => model.BottleTypeId)
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Quantity)
+                        @Html.ValidationMessageFor(model => model.Quantity)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Price)
+                        @Html.ValidationMessageFor(model => model.Price)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Date, new { @class = "datepicker" })
+                        @Html.ValidationMessageFor(model => model.Date)
+                    </div>
+                </div>
+            </fieldset>
+        </div>
 
         <div style="background-color: salmon;">
             <fieldset id="wineFieldset">
@@ -63,51 +109,6 @@
                     <div class="col-md-10">
                         @Html.DropDownListFor(model => model.Year, (SelectList)this.ViewData["Years"])
                         @Html.ValidationMessageFor(model => model.Year)
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div style="background-color: dodgerblue; ">
-            <fieldset>
-                <legend>Transaction</legend>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.TransactionTypeId, "TransactionTypeId", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.TransactionTypeId, (SelectList)this.ViewData["TransactionTypes"])
-                        @Html.ValidationMessageFor(model => model.TransactionTypeId)
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BottleTypeId, "BottleTypeId", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.BottleTypeId, (SelectList)this.ViewData["BottleTypes"])
-                        @Html.ValidationMessageFor(model => model.BottleTypeId)
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Quantity)
-                        @Html.ValidationMessageFor(model => model.Quantity)
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Price)
-                        @Html.ValidationMessageFor(model => model.Price)
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Date, new { @class = "datepicker" })
-                        @Html.ValidationMessageFor(model => model.Date)
                     </div>
                 </div>
             </fieldset>

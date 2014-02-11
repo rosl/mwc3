@@ -216,6 +216,25 @@ namespace MWC3.Controllers
             ViewData["TransactionTypes"] = new SelectList(list.OrderBy(g => g.Name), "Id", "Name");
         }
 
+        public void PopulateTransactionTypesList(bool goingIn)
+        {
+            List<TransactionType> list;
+
+            LanguageCode = LanguageHelper.GetLanguageCookie(this.HttpContext);
+            list = goingIn ? 
+                this.Db.TransactionTypes.Where(g => g.ParentId == 0 && g.Multiplier > 0).ToList() : 
+                this.Db.TransactionTypes.Where(g => g.ParentId == 0 && g.Multiplier < 0).ToList();
+
+            var languageList = this.Db.TransactionTypes.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
+
+            foreach (var item in languageList)
+            {
+                list.Find(c => c.Id == item.ParentId).Name = item.Name;
+            }
+
+            ViewData["TransactionTypes"] = new SelectList(list.OrderBy(g => g.Name), "Id", "Name");
+        }
+
         public void PopulateYearList()
         {
             var list = new List<SelectListItem>();

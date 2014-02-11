@@ -1,7 +1,11 @@
 ﻿@using System.Threading
-@using Microsoft.AspNet.Identity
 @{
     MWC3.Helpers.LanguageHelper.SetCurrentCulture(this.Context);
+    var userId = string.Empty;
+    if (Request.IsAuthenticated)
+    {
+        userId = MWC3.Helpers.Static.GetUserId(User.Identity.Name);
+    }
 }
 <!DOCTYPE html>
 <html>
@@ -67,9 +71,10 @@
                 &copy; @DateTime.Now.Year - My Wine Cellar Application (@Thread.CurrentThread.CurrentCulture)
                 @if (Request.IsAuthenticated)
                 {
-                    @MWC3.Helpers.Static.GetUserId(User.Identity.Name);
+                    @userId;
                 }
             </p>
+            @Html.Hidden("userId", @userId)
         </footer>
     </div>
 

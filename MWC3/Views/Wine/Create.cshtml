@@ -1,4 +1,5 @@
-﻿@using Microsoft.Ajax.Utilities
+﻿@using Fabrik.Common.Web
+
 @model MWC3.Models.Wine
 
 @{
@@ -26,7 +27,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.WineColor.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.WineColorId, (SelectList)this.ViewData["WineColors"], string.Empty)
+                @foreach (var a in (SelectList)this.ViewData["WineColors"])
+                {
+                    @Html.RadioButtonFor(b => b.WineColorId, a.Value, new { @class = "radiofor" })  @a.Text
+                }
                 @Html.ValidationMessageFor(model => model.WineColorId)
             </div>
         </div>
@@ -62,7 +66,7 @@
                 @Html.ValidationMessageFor(model => model.BusinessId)
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.IsSparkling, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -78,13 +82,13 @@
                 @Html.ValidationMessageFor(model => model.IsFortified)
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.GrapeIds, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.ListBoxFor(model => model.GrapeIds, (MultiSelectList)this.ViewData["Grapes"], new
                                                                                                     {
-                                                                                                        size = "5", 
+                                                                                                        size = "5",
                                                                                                         @class = "selectlist multiselect"
                                                                                                     })
             </div>
@@ -107,9 +111,9 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript"src="~/Scripts/bootstrap-multiselect.js"></script>
-<script type="text/javascript" src="~/Scripts/Wine/Create.js"></script>
-    <link rel="stylesheet" href="~/Content/bootstrap-multiselect.css" type="text/css"/>
+    <script type="text/javascript" src="~/Scripts/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="~/Scripts/Wine/Create.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap-multiselect.css" type="text/css" />
     <style type="text/css">
         .multiselect {
             min-width: 400px;
