@@ -1,7 +1,10 @@
 ﻿namespace MWC3.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+
+    using MWC3.Models;
 
     public class SearchController : BaseController
     {
@@ -11,7 +14,7 @@
         [Route("search/distributor")]
         public JsonResult Distributor()
         {
-            var list = this.Db.Businesses.Where(b=>b.IsDistributor).ToList();
+            var list = this.Db.Businesses.Where(b => b.IsDistributor).ToList();
             return this.Json(list.Select(l => new { Key = l.Id, Value = l.Name + " - " + l.City }), JsonRequestBehavior.AllowGet);
         }
 
@@ -41,7 +44,8 @@
         public JsonResult Wine()
         {
             var list = this.Db.Wines.ToList();
-            return this.Json(list.Where(l => l.Business.IsProducer).Select(l => new { Key = l.Id, Value = l.Name + " - " + l.Business.Name + " - " + l.Business.City }), JsonRequestBehavior.AllowGet);
+            var jsonList = list.Where(l => l.Business.IsProducer).Select(l => new { Key = l.Id, Value = l.Name + " - " + l.Business.Name + " - " + l.Business.City });
+            return this.Json(jsonList, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -69,6 +73,37 @@
 
             return this.Json(null, JsonRequestBehavior.AllowGet);
 
+        }
+
+        [HttpGet]
+        [Route("search/transaction/{userId}")]
+        public JsonResult Transaction(string userId)
+        {
+            var list = this.Db.Transactions.Where(t => t.UserId == userId && t.TransactionType.Multiplier > 0).OrderBy(t => t.WineId).ThenBy(t => t.Year).ToList();
+            var distinctList = list.Distinct(new DistinctTransactionComparer());
+            var jsonList =
+                distinctList.Select(
+                    t =>
+                        new
+                        {
+                            Key = t.Id,
+                            Value = t.Wine.Name + " - " + t.Year + " - " + t.Business.Name + " - " + t.Business.City
+                        });
+            return this.Json(jsonList, JsonRequestBehavior.AllowGet);
+        }
+    }
+
+    class DistinctTransactionComparer : IEqualityComparer<Transaction>
+    {
+
+        public bool Equals(Transaction x, Transaction y)
+        {
+            return x.WineId == y.WineId && x.Year == y.Year;
+        }
+
+        public int GetHashCode(Transaction obj)
+        {
+            return obj.WineId.GetHashCode() ^ obj.Year.GetHashCode();
         }
     }
 }
