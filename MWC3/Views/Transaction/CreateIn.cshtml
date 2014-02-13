@@ -1,10 +1,10 @@
 ﻿@model MWC3.Models.Transaction
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Into the Cellar";
 }
 
-<h2>Create</h2>
+<h2>Create In</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -13,7 +13,7 @@
         <h4>Transaction</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.Hidden("goingIn", (bool)ViewData["GoingIn"])
+        
         <div style="background-color: dodgerblue; ">
             <fieldset>
                 <legend>Transaction</legend>
@@ -165,6 +165,6 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="~/Scripts/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.autocomplete.js"></script>
-    <script type="text/javascript" src="~/Scripts/Transactions/Create.js"></script>
+    <script type="text/javascript" src="~/Scripts/Transactions/CreateIn.js"></script>
     <link rel="stylesheet" href="~/Content/bootstrap-datepicker.css" type="text/css" />
 }

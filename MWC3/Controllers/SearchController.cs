@@ -76,7 +76,7 @@
         }
 
         [HttpGet]
-        [Route("search/transaction/{userId}")]
+        [Route("search/transaction/user/{userId}")]
         public JsonResult Transaction(string userId)
         {
             var list = this.Db.Transactions.Where(t => t.UserId == userId && t.TransactionType.Multiplier > 0).OrderBy(t => t.WineId).ThenBy(t => t.Year).ToList();
@@ -87,11 +87,41 @@
                         new
                         {
                             Key = t.Id,
-                            Value = t.Wine.Name + " - " + t.Year + " - " + t.Business.Name + " - " + t.Business.City
+                            Value = t.Wine.Name + " - " + t.Year + " - " + t.Wine.Business.Name + " - " + t.Wine.Business.City
                         });
             return this.Json(jsonList, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        [Route("search/transaction/{id}")]
+        public JsonResult Transaction(int id)
+        {
+            var transaction = this.Db.Transactions.Find(id);
+
+            if (transaction != null)
+            {
+                return
+                    this.Json(
+                        new
+                        {
+                            id = transaction.Id,
+                            wineId = transaction.Wine.Id,
+                            wineName = transaction.Wine.Name,
+                            wineIsFortified = transaction.Wine.IsFortified,
+                            wineIsSparkling = transaction.Wine.IsSparkling,
+                            producer = transaction.Wine.Business,
+                            grapes = transaction.Wine.Grapes.Select(g => g.Name),
+                            color = transaction.Wine.WineColor.Name,
+                            distributor = transaction.Business
+                        },
+                        JsonRequestBehavior.AllowGet);
+            }
+
+            return this.Json(null, JsonRequestBehavior.AllowGet);
+        }
     }
+
+
 
     class DistinctTransactionComparer : IEqualityComparer<Transaction>
     {

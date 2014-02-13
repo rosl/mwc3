@@ -402,7 +402,8 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\site.jquery.lib.js" />
-    <Content Include="Scripts\Transactions\Create.js" />
+    <Content Include="Scripts\Transactions\CreateOut.js" />
+    <Content Include="Scripts\Transactions\CreateIn.js" />
     <Content Include="Scripts\Wine\Create.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -475,12 +476,13 @@
     <Content Include="Views\TransactionTypes\Details.cshtml" />
     <Content Include="Views\TransactionTypes\Edit.cshtml" />
     <Content Include="Views\TransactionTypes\Index.cshtml" />
-    <Content Include="Views\Transaction\Create.cshtml" />
+    <Content Include="Views\Transaction\CreateIn.cshtml" />
     <Content Include="Views\Transaction\Delete.cshtml" />
     <Content Include="Views\Transaction\Details.cshtml" />
     <Content Include="Views\Transaction\Edit.cshtml" />
     <Content Include="Views\Transaction\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Transaction\CreateOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

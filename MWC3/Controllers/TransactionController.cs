@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using MWC3.Models;
-using MWC3.DAL;
 
 namespace MWC3.Controllers
 {
+    using System.Diagnostics;
+
     [Authorize]
     public class TransactionController : BaseController
     {
@@ -28,6 +26,7 @@ namespace MWC3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
             Transaction transaction = Db.Transactions.Find(id);
             if (transaction == null)
             {
@@ -36,37 +35,57 @@ namespace MWC3.Controllers
             return View(transaction);
         }
 
-        // GET: /Transaction/Create
-        public ActionResult Create(bool? dir)
+        // GET: /Transaction/CreateIn
+        public ActionResult CreateIn()
         {
-            bool goingIn = dir != false;
-
-            ViewData["GoingIn"] = goingIn;
-
             // set default values
             var transaction = new Transaction
                               {
                                   BottleTypeId = 3,
                                   Year = DateTime.Now.Year - 1,
-                                  Date = DateTime.Now.Date
+                                  Date = DateTime.Now.Date,
+                                  Quantity = 1
                               };
 
             ViewBag.BusinessId = new SelectList(Db.Businesses, "Id", "Name");
             ViewBag.WineId = new SelectList(Db.Wines, "Id", "Name");
 
             this.PopulateBottleTypeList();
-            this.PopulateTransactionTypesList(goingIn);
+            this.PopulateTransactionTypesList(true);
             this.PopulateYearList();
 
             return View(transaction);
         }
 
-        // POST: /Transaction/Create
+        // GET: /Transaction/CreateOut
+        public ActionResult CreateOut()
+        {
+            // set default values
+            var transaction = new Transaction
+            {
+                BottleTypeId = 3,
+                Year = DateTime.Now.Year - 1,
+                Date = DateTime.Now.Date,
+                Quantity = 1
+            };
+
+            // ViewBag.BusinessId = new SelectList(Db.Businesses, "Id", "Name");
+            // ViewBag.WineId = new SelectList(Db.Wines, "Id", "Name");
+
+            this.PopulateBottleTypeList();
+            this.PopulateTransactionTypesList(false);
+            this.PopulateYearList();
+
+            return View(transaction);
+        }
+
+
+        // POST: /Transaction/CreateIn
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Quantity,TransactionTypeId,BusinessId,BottleTypeId,WineId,Year,Price,Date")] Transaction transaction)
+        public ActionResult CreateIn([Bind(Include="Id,Quantity,TransactionTypeId,BusinessId,BottleTypeId,WineId,Year,Price,Date")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
@@ -75,6 +94,39 @@ namespace MWC3.Controllers
                 transaction.AddedBy = this.GetUserName();
                 transaction.TimeStamp = DateTime.Now;
 
+                Db.Transactions.Add(transaction);
+                Db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.BottleTypeId = new SelectList(Db.BottleTypes, "Id", "Name", transaction.BottleTypeId);
+            ViewBag.BusinessId = new SelectList(Db.Businesses, "Id", "Name", transaction.BusinessId);
+            ViewBag.TransactionTypeId = new SelectList(Db.TransactionTypes, "Id", "Name", transaction.TransactionTypeId);
+            ViewBag.WineId = new SelectList(Db.Wines, "Id", "Name", transaction.WineId);
+            return View(transaction);
+        }
+
+        // POST: /Transaction/CreateOut
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateOut([Bind(Include = "Id,Quantity,TransactionTypeId,TransactionId")] Transaction transaction)
+        {
+            if (ModelState.IsValid)
+            {
+                var myInTransaction = this.Db.Transactions.Find(transaction.Id);
+                if (myInTransaction != null)
+                {
+                    transaction.WineId = myInTransaction.WineId;
+                    transaction.Year = myInTransaction.Year;
+                    transaction.BusinessId = myInTransaction.BusinessId;
+                    transaction.Price = myInTransaction.Price;
+                    transaction.TotalPrice = myInTransaction.Price * transaction.Quantity;
+                    transaction.UserId = this.GetUserId();
+                    transaction.AddedBy = this.GetUserName();
+                    transaction.TimeStamp = DateTime.Now;
+                }
                 Db.Transactions.Add(transaction);
                 Db.SaveChanges();
                 return RedirectToAction("Index");
