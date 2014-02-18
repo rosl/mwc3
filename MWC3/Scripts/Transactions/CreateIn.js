@@ -61,6 +61,12 @@
             useWatermark();
             Create.LoadDistributor();
         });
+        $('#priceCents').change(function () {
+            Create.NewPrice();
+        });
+        $('#priceInt').change(function () {
+            Create.NewPrice();
+        });
     },
     SetupClickBehavior: function () {
         $('#btAddWine').click(function () {
@@ -74,6 +80,21 @@
             //$('#myModal').modal('show');
         });
     },
+    NewPrice: function () {
+        try {
+            var priceInt = parseInt($('#priceInt').val());
+            var priceCents = parseInt($('#priceCents').val());
+            if (!(isNaN(priceInt) || isNaN(priceCents))) {
+                $("#Price").val(priceInt + "," + priceCents);
+            } else {
+                throw ("invalid number");
+            }
+        } catch (e) {
+            $("#Price").val("0");
+            $("#priceInt").val("0");
+            $("#priceCents").val("00");
+        }
+    },
     Initialize: function () {
         useWatermark();
         Create.HideWineForm();
@@ -81,8 +102,8 @@
         Create.SetupClickBehavior();
         Create.LoadDistributors();
         Create.LoadWines();
+        Create.SetupPriceBehavior();
     }
-
 };
 
 $(document).ready(function () {
