@@ -229,7 +229,11 @@ namespace MWC3.Controllers
 
             foreach (var item in languageList)
             {
-                list.Find(c => c.Id == item.ParentId).Name = item.Name;
+                var x = list.FirstOrDefault(c => c.Id == item.ParentId);
+                if (x != null)
+                {
+                    x.Name = item.Name;
+                }
             }
 
             ViewData["TransactionTypes"] = new SelectList(list.OrderBy(g => g.Name), "Id", "Name");

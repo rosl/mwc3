@@ -8,6 +8,7 @@ using MWC3.Models;
 namespace MWC3.Controllers
 {
     using System.Diagnostics;
+    using System.Globalization;
 
     [Authorize]
     public class TransactionController : BaseController
@@ -47,8 +48,13 @@ namespace MWC3.Controllers
                                   Quantity = 1
                               };
 
-            ViewBag.BusinessId = new SelectList(Db.Businesses, "Id", "Name");
-            ViewBag.WineId = new SelectList(Db.Wines, "Id", "Name");
+            // ViewBag.BusinessId = new SelectList(Db.Businesses, "Id", "Name");
+            // ViewBag.WineId = new SelectList(Db.Wines, "Id", "Name");
+            ViewBag.PriceInt = Math.Floor(transaction.Price);
+            var priceCents = ("0"
+                              + (transaction.Price - Math.Floor(transaction.Price) * 100).ToString(
+                                  CultureInfo.InvariantCulture));
+            ViewBag.PriceCents = priceCents.Substring(priceCents.Length - 2);
 
             this.PopulateBottleTypeList();
             this.PopulateTransactionTypesList(true);

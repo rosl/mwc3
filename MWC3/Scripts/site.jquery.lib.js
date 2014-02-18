@@ -43,9 +43,16 @@ useWatermark = function () {
     });
 };
 
+showHiddenFields = function() {
+    $('input[type="hidden"]').each(function() {
+        this.type = 'text';
+    });
+};
+
 var isInIframe = (window.location != window.parent.location) ? true : false;
 
 $(document).ready(function () {
+    showHiddenFields();
     if (isInIframe) {
         $('.navbar').hide();
         $('h4').hide();

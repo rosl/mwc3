@@ -1,4 +1,5 @@
-﻿@model MWC3.Models.Transaction
+﻿@using System.Globalization
+@model MWC3.Models.Transaction
 
 @{
     ViewBag.Title = "Into the Cellar";
@@ -41,12 +42,13 @@
                         @Html.ValidationMessageFor(model => model.Quantity)
                     </div>
                 </div>
-
+                @Html.HiddenFor(model => model.Price)
                 <div class="form-group">
                     @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Price)
-                        @Html.ValidationMessageFor(model => model.Price)
+                        @Html.TextBox("priceInt", "0", new { style = "width: 50px; text-align:right;" }),
+                        @Html.TextBox("priceCents", "00", new { style = "width: 20px;" })
+                        @*@Html.ValidationMessageFor(model => model.Price)*@
                     </div>
                 </div>
 
