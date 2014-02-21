@@ -117,24 +117,28 @@ namespace MWC3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOut([Bind(Include = "Id,Quantity,TransactionTypeId,TransactionId")] Transaction transaction)
+        public ActionResult CreateOut([Bind(Include = "Id,Quantity,TransactionTypeId,TransactionId, Date")] Transaction transaction)
         {
+            var transactionId = Request.Form["TransactionId"];
+
             if (ModelState.IsValid)
             {
-                var myInTransaction = this.Db.Transactions.Find(transaction.Id);
+                var myInTransaction = this.Db.Transactions.Find(Convert.ToInt32(transactionId));
                 if (myInTransaction != null)
                 {
                     transaction.WineId = myInTransaction.WineId;
                     transaction.Year = myInTransaction.Year;
                     transaction.BusinessId = myInTransaction.BusinessId;
-                    transaction.Price = myInTransaction.Price;
+                    transaction.Price = 0;
                     transaction.TotalPrice = myInTransaction.Price * transaction.Quantity;
                     transaction.UserId = this.GetUserId();
                     transaction.AddedBy = this.GetUserName();
                     transaction.TimeStamp = DateTime.Now;
+                    transaction.BottleTypeId = myInTransaction.BottleTypeId;
+                    Db.Transactions.Add(transaction);
+                    Db.SaveChanges();
                 }
-                Db.Transactions.Add(transaction);
-                Db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
