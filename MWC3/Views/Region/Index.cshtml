@@ -5,7 +5,9 @@
 }
 
 <h2>Regions</h2>
-
+<p>
+    filter: @Html.DropDownList("countryId", (SelectList)this.ViewData["Countries"])
+</p>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -49,3 +51,7 @@
 }
 
 </table>
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/Regions/Index.js"></script>
+}

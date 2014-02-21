@@ -12,11 +12,23 @@ namespace MWC3.Controllers
     public class RegionController : BaseController
     {
         // GET: /Region/
+        [Route("Region")]
+        [Route("Region/Index")]
         public ActionResult Index()
         {
-            var regions = this.Db.Regions.Include(r => r.Country);
+            this.PopulateCountryList();
+            var regions = this.Db.Regions.Include(r => r.Country).OrderBy(x=>x.Country.Name).ThenBy(x=>x.Name);
             return View(regions.ToList());
         }
+
+        [Route("Region/{id}")]
+        public ActionResult Index(int id)
+        {
+            this.PopulateCountryList(id);
+            var regions = this.Db.Regions.Include(r => r.Country).Where(x=>x.CountryId == id).OrderBy(x=>x.Name);
+            return View(regions.ToList());
+        }
+
 
         // GET: /Region/Details/5
         public ActionResult Details(int? id)

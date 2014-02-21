@@ -64,3 +64,4 @@
 /// <reference path="transactions/createin.js" />
 /// <reference path="transactions/createout.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />
+/// <reference path="regions/index.js" />

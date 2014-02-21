@@ -16,7 +16,6 @@
         [Route("Qualifiaction/Index")]
         public ActionResult Index()
         {
-            // var qualifications = db.Qualifications.Include(q => q.Country).Include(q => q.Region);
             this.PopulateCountryList();
             var qualifications = this.Db.Qualifications;
             return View(qualifications.ToList());
@@ -26,7 +25,6 @@
         {
             // var qualifications = db.Qualifications.Include(q => q.Country).Include(q => q.Region);
             this.PopulateCountryList(id);
-            // ViewBag["countryId"] = id;
             var qualifications = this.Db.Qualifications.Where(x=>x.CountryId == id);
             return View(qualifications.ToList());
         }
