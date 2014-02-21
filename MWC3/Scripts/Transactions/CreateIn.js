@@ -13,7 +13,7 @@
                 onSelect: function (suggestion) {
                     $('#BusinessId').val(suggestion.data);
                     $('#BusinessId').change();
-                    alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                    //alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
                 }
             });
         });
@@ -85,7 +85,7 @@
             var priceInt = parseInt($('#priceInt').val());
             var priceCents = parseInt($('#priceCents').val());
             if (!(isNaN(priceInt) || isNaN(priceCents))) {
-                $("#Price").val(priceInt + "," + priceCents);
+                $("#Price").val(priceInt + "." + priceCents);
             } else {
                 throw ("invalid number");
             }
@@ -102,10 +102,10 @@
         Create.SetupClickBehavior();
         Create.LoadDistributors();
         Create.LoadWines();
-        Create.SetupPriceBehavior();
     }
 };
 
 $(document).ready(function () {
+    $('.datepicker').datepicker();
     Create.Initialize();
 });

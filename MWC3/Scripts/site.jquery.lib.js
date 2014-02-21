@@ -52,7 +52,7 @@ showHiddenFields = function() {
 var isInIframe = (window.location != window.parent.location) ? true : false;
 
 $(document).ready(function () {
-    showHiddenFields();
+    // showHiddenFields();
     if (isInIframe) {
         $('.navbar').hide();
         $('h4').hide();

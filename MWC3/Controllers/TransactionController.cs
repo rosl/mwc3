@@ -105,10 +105,10 @@ namespace MWC3.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BottleTypeId = new SelectList(Db.BottleTypes, "Id", "Name", transaction.BottleTypeId);
-            ViewBag.BusinessId = new SelectList(Db.Businesses, "Id", "Name", transaction.BusinessId);
-            ViewBag.TransactionTypeId = new SelectList(Db.TransactionTypes, "Id", "Name", transaction.TransactionTypeId);
-            ViewBag.WineId = new SelectList(Db.Wines, "Id", "Name", transaction.WineId);
+            this.PopulateBottleTypeList();
+            this.PopulateTransactionTypesList(false);
+            this.PopulateYearList();
+
             return View(transaction);
         }
 

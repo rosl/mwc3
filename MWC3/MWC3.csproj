@@ -304,6 +304,16 @@
     <Compile Include="Models\Wine.cs" />
     <Compile Include="Models\WineColor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Shared\Layout.nl-NL1.Designer.cs">
+      <DependentUpon>Layout.nl-NL.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Shared\Layout.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Layout.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -546,6 +556,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201402101455189_ChangeUser.resx">
       <DependentUpon>201402101455189_ChangeUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\Layout.nl-NL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Layout.nl-NL1.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources.Shared</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\Layout.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Layout.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources.Shared</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
