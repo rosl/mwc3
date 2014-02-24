@@ -76,7 +76,7 @@ namespace MWC3.Controllers
 
         public void PopulateCountryList()
         {
-            LanguageCode = LanguageHelper.GetLanguageCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
             var list = this.Db.Countries.Where(g => g.ParentId == 0).ToList();
 
             var languageList = this.Db.Countries.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
@@ -91,7 +91,7 @@ namespace MWC3.Controllers
 
         public void PopulateCountryList(int id)
         {
-            LanguageCode = LanguageHelper.GetLanguageCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
             var list = this.Db.Countries.Where(g => g.ParentId == 0).ToList();
 
             var languageList = this.Db.Countries.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
@@ -109,7 +109,7 @@ namespace MWC3.Controllers
 
         public void PopulateParentCountryList()
         {
-            LanguageCode = LanguageHelper.GetLanguageCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
             var list = this.Db.Countries.Where(g => g.ParentId == 0).ToList();
 
             var languageList =
@@ -167,7 +167,7 @@ namespace MWC3.Controllers
 
         public void PopulateWineColorList()
         {
-            LanguageCode = LanguageHelper.GetLanguageCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
             var list = this.Db.WineColors.Where(g => g.ParentId == 0).OrderBy(g => g.Name).ToList();
 
             var wineColorList = this.Db.WineColors.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
@@ -203,7 +203,7 @@ namespace MWC3.Controllers
 
         public void PopulateTransactionTypesList()
         {
-            LanguageCode = LanguageHelper.GetLanguageCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
             var list = this.Db.TransactionTypes.Where(g => g.ParentId == 0).ToList();
 
             var languageList = this.Db.TransactionTypes.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
@@ -220,7 +220,7 @@ namespace MWC3.Controllers
         {
             List<TransactionType> list;
 
-            LanguageCode = LanguageHelper.GetLanguageCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
             list = goingIn ? 
                 this.Db.TransactionTypes.Where(g => g.ParentId == 0 && g.Multiplier > 0).ToList() : 
                 this.Db.TransactionTypes.Where(g => g.ParentId == 0 && g.Multiplier < 0).ToList();
