@@ -14,7 +14,7 @@ namespace MWC3.Controllers
             Helpers.LanguageHelper.SetCultureToCookie(this.HttpContext);
             Helpers.LanguageHelper.SetCurrentCulture(this.HttpContext);
 
-            Session["Culture"] = new CultureInfo(Helpers.LanguageHelper.GetCultureFromCookie(this.HttpContext));
+            // Session["Culture"] = new CultureInfo(Helpers.LanguageHelper.GetCultureFromCookie(this.HttpContext));
 
 
             var urlReferrer = this.Request.UrlReferrer;
