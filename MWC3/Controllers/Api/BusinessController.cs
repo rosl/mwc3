@@ -16,10 +16,10 @@ namespace MWC3.Controllers.Api
             var list = this.db.Businesses.Where(r => r.CountryId == id).OrderBy(r => r.Name);
             dropDownList.Add(new Dropdown { Id = 0, Name = string.Empty, Selected = false });
 
-            dropDownList.AddRange(list.Select(region => new Dropdown
+            dropDownList.AddRange(list.Select(business => new Dropdown
             {
-                Id = region.Id,
-                Name = region.Name,
+                Id = business.Id,
+                Name = business.Name + " - " + business.City,
                 Selected = false
             }));
 

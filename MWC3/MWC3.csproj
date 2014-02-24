@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
@@ -291,6 +294,10 @@
     <Compile Include="Migrations\201402101455189_ChangeUser.Designer.cs">
       <DependentUpon>201402101455189_ChangeUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201402241623242_grapeColor.cs" />
+    <Compile Include="Migrations\201402241623242_grapeColor.Designer.cs">
+      <DependentUpon>201402241623242_grapeColor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BottleType.cs" />
@@ -323,6 +330,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\migrating.txt" />
+    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\bootstrap-multiselect.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
@@ -345,6 +353,7 @@
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Grapes\Index.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
@@ -562,6 +571,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201402101455189_ChangeUser.resx">
       <DependentUpon>201402101455189_ChangeUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402241623242_grapeColor.resx">
+      <DependentUpon>201402241623242_grapeColor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Shared\Layout.nl-NL.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

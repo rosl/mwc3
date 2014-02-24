@@ -19,9 +19,11 @@
 
         [NotMapped]
         public virtual Grape ParentGrape { get; set; }
+        
         [NotMapped]
         public virtual List<Grape> ChildGrapes { get; set; }
-        [NotMapped]
+
+        [ForeignKey("ColorId")]
         public virtual GrapeColor GrapeColor { get; set; }
 
         public virtual ICollection<Wine> Wines { get; set; }

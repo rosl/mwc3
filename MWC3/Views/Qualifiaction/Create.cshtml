@@ -66,7 +66,8 @@
             $('#CountryId').change(function () {
                 var countryId = $('#CountryId').val();
                 $("#RegionId").clearSelect();
-                $.getJSON("/Search/Country/" + countryId + "/Region", function (data) {
+                var url = "/api/country/" + countryId + "/region";
+                $.getJSON(url, function (data) {
                     $("#RegionId").fillSelect(data);
                 });
             });

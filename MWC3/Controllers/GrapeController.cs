@@ -1,10 +1,15 @@
 ﻿namespace MWC3.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Globalization;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+
+    using Elmah;
+
     using MWC3.Models;
 
     using WebGrease.Css.Extensions;
@@ -13,9 +18,40 @@
     {
 
         // GET: /Grape/
+        [Route("Grape")]
+        [Route("Grape/Index")]
         public ActionResult Index()
         {
-            return View(this.Db.Grapes.ToList());
+            ViewData["Filters"] = new SelectList(CreateFilterSelection(), "Value", "Text", "0");
+            ViewData["ParentGrapes"] = this.Db.Grapes.Where(x => x.ParentId == 0).ToList();
+            return View(this.Db.Grapes.Include(g=>g.GrapeColor).ToList());
+        }
+
+        [Route("Grape/{id}")]
+        [Route("Grape/Index/{id}")]
+        public ActionResult Index(int id)
+        {
+            ViewData["Filters"] = new SelectList(CreateFilterSelection(), "Value", "Text", id.ToString(CultureInfo.InvariantCulture));
+            ViewData["ParentGrapes"] = this.Db.Grapes.Where(x => x.ParentId == 0).ToList();
+
+            List<Grape> list;
+
+            switch (id)
+            {
+                case 1:
+                    // parent grapes
+                    list = this.Db.Grapes.Where(x => x.ParentId == 0).ToList();
+                    break;
+                case 2:
+                    // child grapes
+                    list = this.Db.Grapes.Where(x => x.ParentId != 0).ToList();
+                    break;
+                default:
+                    list = this.Db.Grapes.Include(g=>g.GrapeColor).ToList();
+                    break;
+            }
+
+            return View(list);
         }
 
         // GET: /Grape/Details/5
@@ -57,27 +93,35 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ParentId,ColorId,AddedBy,TimeStamp")] Grape grape)
+        public ActionResult Create([Bind(Include = "Id,Name,ParentId,ColorId")] Grape grape)
         {
             if (ModelState.IsValid)
             {
-                // check if color is the same as parent grape
-                if (grape.ParentId > 0)
+                // check if grape does exist already
+                var grapeFound = Db.Grapes.Any(x => x.Name.ToLower() == grape.Name.ToLower());
+                if (!grapeFound)
                 {
-                    var parentGrape = this.Db.Grapes.Find(grape.ParentId);
-                    if (parentGrape == null)
+                    // check if color is the same as parent grape
+                    if (grape.ParentId > 0)
                     {
-                        return HttpNotFound();
+                        var parentGrape = this.Db.Grapes.Find(grape.ParentId);
+                        if (parentGrape == null)
+                        {
+                            return HttpNotFound();
+                        }
+                        grape.ColorId = parentGrape.ColorId;
                     }
-                    grape.ColorId = parentGrape.ColorId;
+                    grape.TimeStamp = DateTime.Now;
+                    grape.AddedBy = this.GetUserName();
+                    this.Db.Grapes.Add(grape);
+                    this.Db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                grape.TimeStamp = DateTime.Now;
-                grape.AddedBy = this.GetUserName();
-                this.Db.Grapes.Add(grape);
-                this.Db.SaveChanges();
-                return RedirectToAction("Index");
             }
 
+            this.PopulateColorList();
+            this.PopulateParentGrapeList();
+            this.PopulateUserName();
             return View(grape);
         }
 
@@ -105,36 +149,55 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ParentId,ColorId,AddedBy,TimeStamp")] Grape grape)
+        public ActionResult Edit([Bind(Include = "Id,Name,ParentId,ColorId")] Grape grape)
         {
-            if (ModelState.IsValid)
+            try
             {
-                // check if color is the same as parent grape
-                if (grape.ParentId > 0)
+                if (ModelState.IsValid)
                 {
-                    var parentGrape = this.Db.Grapes.Find(grape.ParentId);
-                    if (parentGrape == null)
+                    // check if grape does exist already
+                    var foundGrape = Db.Grapes.FirstOrDefault(x => x.Name.ToLower() == grape.Name.ToLower());
+                    if (foundGrape != null && foundGrape.Id != grape.Id)
                     {
-                        return HttpNotFound();
+                        throw new Exception("This grape exists already in the database");
                     }
-                    grape.ColorId = parentGrape.ColorId;
-                }
-                else
-                {
-                    // give childgrapes the same color as parentgrape
-                    var childGrapes = this.Db.Grapes.Where(g => g.ParentId == grape.Id);
-                    if (childGrapes.Any())
-                    {
-                        childGrapes.ForEach(g=>g.ColorId = grape.ColorId);
-                    }
-                }
 
-                grape.TimeStamp = DateTime.Now;
-                grape.AddedBy = this.GetUserName();
-                this.Db.Entry(grape).State = EntityState.Modified;
-                this.Db.SaveChanges();
-                return RedirectToAction("Index");
+                    // check if color is the same as parent grape
+                    if (grape.ParentId > 0)
+                    {
+                        var parentGrape = this.Db.Grapes.Find(grape.ParentId);
+                        if (parentGrape == null)
+                        {
+                            return HttpNotFound();
+                        }
+                        grape.ColorId = parentGrape.ColorId;
+                    }
+                    else
+                    {
+                        // give childgrapes the same color as parentgrape
+                        var childGrapes = this.Db.Grapes.Where(g => g.ParentId == grape.Id);
+                        if (childGrapes.Any())
+                        {
+                            childGrapes.ForEach(g => g.ColorId = grape.ColorId);
+                        }
+                    }
+
+                    grape.TimeStamp = DateTime.Now;
+                    grape.AddedBy = this.GetUserName();
+                    this.Db.Entry(grape).State = EntityState.Modified;
+                    this.Db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (Exception e)
+            {
+                // log exception
+                ErrorSignal.FromCurrentContext().Raise(e);
+            }
+
+            this.PopulateColorList();
+            this.PopulateParentGrapeList();
+            this.PopulateUserName();
             return View(grape);
         }
 
@@ -199,6 +262,15 @@
             // var languages = this.Request.UserLanguages;
 
             return this.Db.GrapeColors.FirstOrDefault(c => c.ColorId == id && c.LanguageCode == "en");
+        }
+
+        private List<SelectListItem> CreateFilterSelection()
+        {
+            var item1 = new SelectListItem { Selected = false, Text = "All", Value = "0" };
+            var item2 = new SelectListItem { Selected = false, Text = "Parent Grapes", Value = "1" };
+            var item3 = new SelectListItem { Selected = false, Text = "Child Grapes", Value = "2" };
+
+            return new List<SelectListItem> { item1, item2, item3 };
         }
 
     }
