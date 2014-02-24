@@ -10,7 +10,7 @@ $.fn.fillSelect = function (data) {
         if (this.tagName == 'SELECT') {
             var dropdownList = this;
             $.each(data, function (index, optionData) {
-                var option = new Option(optionData.Text, optionData.Value);
+                var option = new Option(optionData.Name, optionData.Id);
 
                 //if ($.browser.msie()) {
                 //    dropdownList.add(option);

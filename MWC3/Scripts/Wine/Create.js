@@ -4,19 +4,21 @@
         Create.SetupChangeBehavior();
     },
     LoadRegions: function(countryId) {
-        $.getJSON("/api/Country/" + countryId + "/Region", function(data) {
+        $.getJSON("/api/country/" + countryId + "/region", function(data) {
             $("#RegionId").fillSelect(data);
             $("#RegionId").change();
         });
     },
-    LoadBusinesses: function(countryId) {
-        $.getJSON("/Business/GetProducers", { countryId: countryId }, function(data) {
+    LoadBusinesses: function (countryId) {
+        var url = "/api/country/" + countryId + "/producer";
+        $.getJSON(url, function(data) {
             $("#BusinessId").fillSelect(data);
         });
     },
     LoadQualifications: function(countryId, regionId) {
         $("#QualificationId").clearSelect();
-        $.getJSON("/Qualifiaction/GetQualifications", { countryId: countryId, RegionId: regionId }, function (data) {
+        var url = "/api/country/" + countryId + "/region/" + regionId + "/qualification";
+        $.getJSON(url, function (data) {
             $("#QualificationId").fillSelect(data);
         });
     },

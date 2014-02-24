@@ -155,24 +155,24 @@
             base.Dispose(disposing);
         }
 
-        [Route("Qualifiaction/GetQualifications")]
-        public JsonResult GetQualifications(int countryId, int? regionId)
-        {
-            List<Qualification> list;
+        //[Route("Qualifiaction/GetQualifications")]
+        //public JsonResult GetQualifications(int countryId, int? regionId)
+        //{
+        //    List<Qualification> list;
 
-            if (regionId == null || regionId == 0)
-            {
-                list = this.Db.Qualifications.Where(r => r.CountryId == countryId).OrderBy(r => r.ShortName).ToList();
-            }
-            else
-            {
-                var list1 = this.Db.Qualifications.Where(r => r.CountryId == countryId && r.RegionId == regionId).OrderBy(r => r.ShortName).ToList();
-                var list2 = this.Db.Qualifications.Where(d => d.CountryId == countryId && d.RegionId == 0).OrderBy(d => d.ShortName).ToList();
-                var list3 = this.Db.Qualifications.Where(d => d.CountryId == countryId && d.RegionId == null).OrderBy(d => d.ShortName).ToList();
-                list = list1.Union(list2).Union(list3).OrderBy(r=>r.ShortName).ToList();
-            }
+        //    if (regionId == null || regionId == 0)
+        //    {
+        //        list = this.Db.Qualifications.Where(r => r.CountryId == countryId).OrderBy(r => r.ShortName).ToList();
+        //    }
+        //    else
+        //    {
+        //        var list1 = this.Db.Qualifications.Where(r => r.CountryId == countryId && r.RegionId == regionId).OrderBy(r => r.ShortName).ToList();
+        //        var list2 = this.Db.Qualifications.Where(d => d.CountryId == countryId && d.RegionId == 0).OrderBy(d => d.ShortName).ToList();
+        //        var list3 = this.Db.Qualifications.Where(d => d.CountryId == countryId && d.RegionId == null).OrderBy(d => d.ShortName).ToList();
+        //        list = list1.Union(list2).Union(list3).OrderBy(r=>r.ShortName).ToList();
+        //    }
 
-            return this.Json(list.Select(l => new { Selected = false, Value = l.Id, Text = l.Name }), JsonRequestBehavior.AllowGet);
-        }
+        //    return this.Json(list.Select(l => new { Selected = false, Value = l.Id, Text = l.Name }), JsonRequestBehavior.AllowGet);
+        //}
     }
 }
