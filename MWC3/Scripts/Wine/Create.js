@@ -15,7 +15,14 @@
             $("#BusinessId").fillSelect(data);
         });
     },
-    LoadQualifications: function(countryId, regionId) {
+    LoadQualificationsByCountry: function (countryId) {
+        $("#QualificationId").clearSelect();
+        var url = "/api/country/" + countryId + "/qualification";
+        $.getJSON(url, function (data) {
+            $("#QualificationId").fillSelect(data);
+        });
+    },
+    LoadQualificationsByCountryAndRegion: function(countryId, regionId) {
         $("#QualificationId").clearSelect();
         var url = "/api/country/" + countryId + "/region/" + regionId + "/qualification";
         $.getJSON(url, function (data) {
@@ -35,11 +42,12 @@
             $("#BusinessId").clearSelect();
             Create.LoadRegions(countryId);
             Create.LoadBusinesses(countryId);
+            Create.LoadQualificationsByCountry(countryId);
         });
         $('#RegionId').change(function() {
             var countryId = $('#CountryId').val();
             var regionId = $('#RegionId').val();
-            Create.LoadQualifications(countryId, regionId);
+            Create.LoadQualificationsByCountryAndRegion(countryId, regionId);
         });
     }
 };

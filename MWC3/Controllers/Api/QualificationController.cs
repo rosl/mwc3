@@ -4,38 +4,69 @@ using System.Web.Http;
 
 namespace MWC3.Controllers.Api
 {
+    using System;
+
     using MWC3.Helpers;
     using MWC3.Models;
 
     public class QualificationController : BaseApiController
     {
         [HttpGet]
-        [Route("api/country/{countryId}/region/{regionId}/qualification")]
-        public List<Dropdown> GetQualifications(int countryId, int? regionId)
+        [Route("api/country/{countryId}/qualification")]
+        public List<Dropdown> GetQualifications(int countryId)
         {
             var dropDownList = new List<Dropdown>();
-            List<Qualification> list;
 
-            if (regionId == null || regionId == 0)
+            try
             {
-                list = this.db.Qualifications.Where(r => r.CountryId == countryId).OrderBy(r => r.ShortName).ToList();
+                var list = this.db.Qualifications.Where(r => r.CountryId == countryId).OrderBy(r => r.ShortName).ToList();
+                dropDownList.Add(new Dropdown { Id = 0, Name = string.Empty, Selected = false });
+                dropDownList.AddRange(list.Select(qualification => new Dropdown
+                {
+                    Id = qualification.Id,
+                    Name = qualification.Name,
+                    Selected = false
+                }));
             }
-            else
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+
+            return dropDownList;
+        }
+
+        [HttpGet]
+        [Route("api/country/{countryId}/region/{regionId}/qualification")]
+        public List<Dropdown> GetQualifications(int countryId, int regionId)
+        {
+            var dropDownList = new List<Dropdown>();
+
+            try
             {
                 var list1 = this.db.Qualifications.Where(r => r.CountryId == countryId && r.RegionId == regionId).OrderBy(r => r.ShortName).ToList();
                 var list2 = this.db.Qualifications.Where(d => d.CountryId == countryId && d.RegionId == 0).OrderBy(d => d.ShortName).ToList();
                 var list3 = this.db.Qualifications.Where(d => d.CountryId == countryId && d.RegionId == null).OrderBy(d => d.ShortName).ToList();
-                list = list1.Union(list2).Union(list3).OrderBy(r => r.ShortName).ToList();
+                var list = list1.Union(list2).Union(list3).OrderBy(r => r.ShortName).ToList();
+
+                dropDownList.Add(new Dropdown { Id = 0, Name = string.Empty, Selected = false });
+
+                dropDownList.AddRange(list.Select(qualification => new Dropdown
+                {
+                    Id = qualification.Id,
+                    Name = qualification.Name,
+                    Selected = false
+                }));
+            }
+            catch (Exception)
+            {
+                
+                throw;
             }
 
-            dropDownList.Add(new Dropdown { Id = 0, Name = string.Empty, Selected = false });
 
-            dropDownList.AddRange(list.Select(qualification => new Dropdown
-            {
-                Id = qualification.Id,
-                Name = qualification.Name,
-                Selected = false
-            }));
 
             return dropDownList;
         }
