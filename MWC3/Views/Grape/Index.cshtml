@@ -1,6 +1,6 @@
 ﻿@using MWC3.Models
-@model IEnumerable<MWC3.Models.Grape>
-@*var parentGrapes = (List<M>)ViewData["ParentGrapes"];*@
+@model IEnumerable<Grape>
+
     @{
         ViewBag.Title = "Index";
     }
@@ -49,13 +49,10 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @if (item.ParentId != 0)
+                    @if (item.ParentGrape != null)
                     {
-                        var x = (List<Grape>)ViewData["ParentGrapes"];
-                        var firstOrDefault = x.FirstOrDefault(g => g.Id == item.ParentId);
-                        if (firstOrDefault != null)
                         {
-                            @Html.Label(firstOrDefault.Name);
+                            @Html.Label(item.ParentGrape.Name);
                         }
                     }
                 </td>

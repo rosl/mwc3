@@ -23,8 +23,20 @@
         public ActionResult Index()
         {
             ViewData["Filters"] = new SelectList(CreateFilterSelection(), "Value", "Text", "0");
-            ViewData["ParentGrapes"] = this.Db.Grapes.Where(x => x.ParentId == 0).ToList();
-            return View(this.Db.Grapes.Include(g=>g.GrapeColor).ToList());
+
+            var parentList = this.Db.Grapes.Where(x => x.ParentId == 0).ToList();
+            var list = this.Db.Grapes.ToList();
+            
+            foreach (var grape in list)
+            {
+                var firstOrDefault = parentList.FirstOrDefault(p => p.Id == grape.ParentId);
+                if (firstOrDefault != null)
+                {
+                    grape.ParentGrape = firstOrDefault;
+                }
+            }
+
+            return View(list);
         }
 
         [Route("Grape/{id}")]
@@ -32,8 +44,8 @@
         public ActionResult Index(int id)
         {
             ViewData["Filters"] = new SelectList(CreateFilterSelection(), "Value", "Text", id.ToString(CultureInfo.InvariantCulture));
-            ViewData["ParentGrapes"] = this.Db.Grapes.Where(x => x.ParentId == 0).ToList();
 
+            var parentList = this.Db.Grapes.Where(x => x.ParentId == 0).ToList();
             List<Grape> list;
 
             switch (id)
@@ -49,6 +61,19 @@
                 default:
                     list = this.Db.Grapes.Include(g=>g.GrapeColor).ToList();
                     break;
+            }
+
+            // add parent grapes
+            if (id != 1)
+            {
+                foreach (var grape in list)
+                {
+                    var firstOrDefault = parentList.FirstOrDefault(p => p.Id == grape.ParentId);
+                    if (firstOrDefault != null)
+                    {
+                        grape.ParentGrape = firstOrDefault;
+                    }
+                }
             }
 
             return View(list);
@@ -156,7 +181,7 @@
                 if (ModelState.IsValid)
                 {
                     // check if grape does exist already
-                    var foundGrape = Db.Grapes.FirstOrDefault(x => x.Name.ToLower() == grape.Name.ToLower());
+                    var foundGrape = Db.Grapes.AsNoTracking().FirstOrDefault(x => x.Name.ToLower() == grape.Name.ToLower());
                     if (foundGrape != null && foundGrape.Id != grape.Id)
                     {
                         throw new Exception("This grape exists already in the database");
@@ -172,20 +197,27 @@
                         }
                         grape.ColorId = parentGrape.ColorId;
                     }
-                    else
-                    {
-                        // give childgrapes the same color as parentgrape
-                        var childGrapes = this.Db.Grapes.Where(g => g.ParentId == grape.Id);
-                        if (childGrapes.Any())
-                        {
-                            childGrapes.ForEach(g => g.ColorId = grape.ColorId);
-                        }
-                    }
 
                     grape.TimeStamp = DateTime.Now;
                     grape.AddedBy = this.GetUserName();
                     this.Db.Entry(grape).State = EntityState.Modified;
+
+                    // give childgrapes the same color as parentgrape
+                    var childGrapes = this.Db.Grapes.Where(g => g.ParentId == grape.Id);
+                    if (childGrapes.Any())
+                    {
+                        childGrapes.ForEach(g => g.ColorId = grape.ColorId);
+                        foreach (var childGrape in childGrapes)
+                        {
+                            this.Db.Entry(childGrape).State = EntityState.Modified;
+                        }
+                        // this.Db.SaveChanges();
+                    }
+
                     this.Db.SaveChanges();
+
+
+
                     return RedirectToAction("Index");
                 }
             }
