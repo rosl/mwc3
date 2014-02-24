@@ -4,7 +4,7 @@
     },
     SetupSelectBehavior: function () {
         $('#countryId').change(function () {
-            window.location.href = "/Region/" + $('#countryId').val();
+            window.location.href = "/Search/Country/" + $('#countryId').val() + "Region";
         });
     }
 };

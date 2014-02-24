@@ -119,6 +119,15 @@
 
             return this.Json(null, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        [Route("search/country/{id}/region")]
+        public JsonResult RegionByCountry(int id)
+        {
+            var list = this.Db.Regions.Where(r => r.CountryId == id).OrderBy(r => r.Name).ToList();
+            list.Insert(0, new Region { Name = string.Empty });
+            return this.Json(list.Select(l => new { Selected = false, Value = l.Id, Text = l.Name }), JsonRequestBehavior.AllowGet);
+        }
     }
 
 
