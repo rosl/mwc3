@@ -4,7 +4,7 @@
         Create.SetupChangeBehavior();
     },
     LoadRegions: function(countryId) {
-        $.getJSON("/Search/Country/" + countryId + "/Region", function(data) {
+        $.getJSON("/api/Country/" + countryId + "/Region", function(data) {
             $("#RegionId").fillSelect(data);
             $("#RegionId").change();
         });
