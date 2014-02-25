@@ -16,7 +16,7 @@ namespace MWC3.Controllers
         // GET: /Country/
         public ActionResult Index()
         {
-            return View(this.Db.Countries.ToList());
+            return View(this.Db.Countries.OrderBy(c => c.Name).ToList());
         }
 
         // GET: /Country/Details/5
@@ -53,7 +53,7 @@ namespace MWC3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Name,LanguageCode,ParentId,AddedBy,Timestamp")] Country country)
+        public ActionResult Create([Bind(Include = "Id,Name,LanguageCode,ParentId,AddedBy,Timestamp")] Country country)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace MWC3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Name,LanguageCode,ParentId,AddedBy,Timestamp")] Country country)
+        public ActionResult Edit([Bind(Include = "Id,Name,LanguageCode,ParentId,AddedBy,Timestamp")] Country country)
         {
             if (ModelState.IsValid)
             {
@@ -138,6 +138,22 @@ namespace MWC3.Controllers
 
             // check if region is coupled
             if (this.Db.Regions.Any(g => g.CountryId == id))
+            {
+                return HttpNotFound();
+            }
+
+            if (this.Db.Wines.Any(w => w.CountryId == id))
+            {
+                return HttpNotFound();
+            }
+
+
+            if (this.Db.Businesses.Any(w => w.CountryId == id))
+            {
+                return HttpNotFound();
+            }
+
+            if (this.Db.Qualifications.Any(w => w.CountryId == id))
             {
                 return HttpNotFound();
             }

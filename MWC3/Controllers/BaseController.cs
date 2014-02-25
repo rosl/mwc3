@@ -109,19 +109,9 @@ namespace MWC3.Controllers
 
         public void PopulateParentCountryList()
         {
-            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
-            var list = this.Db.Countries.Where(g => g.ParentId == 0).ToList();
-
-            var languageList =
-                this.Db.Countries.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
-
-            foreach (var country in languageList)
-            {
-                list.Find(c => c.Id == country.ParentId).Name = country.Name;
-            }
-
-            // list.Insert(0, new Country { Id = 0, Name = "No parent country" });
-            ViewData["ParentCountries"] = new SelectList(list.OrderBy(g => g.Name), "Id", "Name");
+            var list = this.Db.Countries.Where(g => g.ParentId == 0).OrderBy(g => g.Name).ToList();
+            list.Insert(0, new Country { Id = 0, Name = "No parent country" });
+            ViewData["ParentCountries"] = new SelectList(list, "Id", "Name");
         }
 
         public void PopulateEnabledLanguages()
