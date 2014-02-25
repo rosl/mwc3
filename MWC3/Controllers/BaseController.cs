@@ -1,13 +1,9 @@
-﻿
-
-namespace MWC3.Controllers
+﻿namespace MWC3.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Threading;
-    using System.Web;
     using System.Web.Mvc;
     
     using MWC3.DAL;
@@ -19,11 +15,6 @@ namespace MWC3.Controllers
         public readonly ApplicationDbContext Db = new ApplicationDbContext();
 
         public string LanguageCode = string.Empty;
-
-        public BaseController()
-        {
-            // this.PopulateUserId();
-        }
 
         public void PopulateUserName()
         {
