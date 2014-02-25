@@ -336,6 +336,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Layout.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Shared\LoginPartial.nl-NL.Designer.cs">
+      <DependentUpon>LoginPartial.nl-NL.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Shared\LoginPartial.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoginPartial.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -603,6 +613,16 @@
     <EmbeddedResource Include="Resources\Shared\Layout.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Layout.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources.Shared</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\LoginPartial.nl-NL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LoginPartial.nl-NL.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources.Shared</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\LoginPartial.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LoginPartial.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources.Shared</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>

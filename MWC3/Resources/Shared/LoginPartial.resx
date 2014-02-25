@@ -117,28 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LocalAccountSubTitle" xml:space="preserve">
-    <value>Gebruik een lokaal account om u aan te melden.</value>
+  <data name="LogIn" xml:space="preserve">
+    <value>Log in</value>
   </data>
-  <data name="LoginText" xml:space="preserve">
-    <value>Aanmelden</value>
-  </data>
-  <data name="OtherServiceSubTitle" xml:space="preserve">
-    <value>Gebruik een andere service om u aan te melden.</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Wachtwoord</value>
+  <data name="LogOff" xml:space="preserve">
+    <value>Log off</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Registreren</value>
-  </data>
-  <data name="RegisterText" xml:space="preserve">
-    <value>als u geen lokaal account hebt.</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Bewaren</value>
-  </data>
-  <data name="UserName" xml:space="preserve">
-    <value>Gebruikersnaam</value>
+    <value>Register</value>
   </data>
 </root>
