@@ -75,3 +75,11 @@ input[type="radio"], input[type="checkbox"] {
     margin-left: 15px;
     margin-right: 4px;
 }
+
+.auto-width {
+    width: auto;
+}
+
+.disabled {
+    background-color: silver;
+}

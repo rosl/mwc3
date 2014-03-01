@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.UserId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UserId)
+                @Html.TextBoxFor(model => model.UserId, new { @disabled = "disabled", @readonly = "readonly", @class = "disabled" })
                 @Html.ValidationMessageFor(model => model.UserId)
             </div>
         </div>
@@ -70,6 +70,15 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Year)
                 @Html.ValidationMessageFor(model => model.Year)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Alcohol, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Alcohol)
+                @Html.ValidationMessageFor(model => model.Alcohol)
+                &nbsp;&#37;
             </div>
         </div>
 
