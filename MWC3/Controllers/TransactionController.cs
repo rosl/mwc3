@@ -14,9 +14,34 @@ namespace MWC3.Controllers
     public class TransactionController : BaseController
     {
         // GET: /Transaction/
+        [Route("Transaction")]
+        [Route("Transaction/Index")]
         public ActionResult Index()
         {
-            var transactions = Db.Transactions.Include(t => t.BottleType).Include(t => t.Business).Include(t => t.TransactionType).Include(t => t.Wine);
+            var userId = this.GetUserId();
+            var transactions = Db.Transactions.Include(t => t.BottleType).Include(t => t.Business).Include(t => t.TransactionType).Include(t => t.Wine).Where(x=>x.UserId == userId);
+            this.PopulateTransactionTypesList();
+            return View(transactions.ToList());
+        }
+
+        [Route("Transaction/Type/{id}")]
+        public ActionResult Index(int id)
+        {
+            
+            var userId = this.GetUserId();
+            IQueryable<Transaction> transactions;
+
+            if (id == 0)
+            {
+                 transactions = Db.Transactions.Include(t => t.BottleType).Include(t => t.Business).Include(t => t.TransactionType).Include(t => t.Wine).Where(x => x.UserId == userId);
+            }
+            else
+            {
+                transactions = Db.Transactions.Include(t => t.BottleType).Include(t => t.Business).Include(t => t.TransactionType).Include(t => t.Wine).Where(x => x.UserId == userId && x.TransactionTypeId == id);    
+            }
+
+            this.PopulateTransactionTypesList(id);
+
             return View(transactions.ToList());
         }
 
@@ -173,10 +198,13 @@ namespace MWC3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Quantity,TransactionTypeId,UserId,BusinessId,BottleTypeId,WineId,Year,Price,Date,AddedBy,TimeStamp")] Transaction transaction)
+        public ActionResult Edit([Bind(Include="Id,Quantity,TransactionTypeId,UserId,BusinessId,BottleTypeId,WineId,Year,Price,Date,AddedBy,TimeStamp,Alcohol")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
+                transaction.AddedBy = this.GetUserName();
+                transaction.TimeStamp = DateTime.Now;
+
                 Db.Entry(transaction).State = EntityState.Modified;
                 Db.SaveChanges();
                 return RedirectToAction("Index");

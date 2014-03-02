@@ -67,3 +67,4 @@
 /// <reference path="bootstrap.js" />
 /// <reference path="respond.matchmedia.addlistener.js" />
 /// <reference path="respond.js" />
+/// <reference path="transactions/index.js" />

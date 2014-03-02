@@ -349,6 +349,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Login.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Common.nl-NL.Designer.cs">
+      <DependentUpon>Common.nl-NL.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Common.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Shared\Layout.nl-NL1.Designer.cs">
       <DependentUpon>Layout.nl-NL.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -468,6 +478,7 @@
     <Content Include="Scripts\site.jquery.lib.js" />
     <Content Include="Scripts\Transactions\CreateOut.js" />
     <Content Include="Scripts\Transactions\CreateIn.js" />
+    <Content Include="Scripts\Transactions\Index.js" />
     <Content Include="Scripts\Wine\Create.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -633,6 +644,16 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Login.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources.Account</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common.nl-NL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.nl-NL.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resource.Common</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resource.Common</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Shared\Layout.nl-NL.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

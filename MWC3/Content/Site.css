@@ -83,3 +83,12 @@ input[type="radio"], input[type="checkbox"] {
 .disabled {
     background-color: silver;
 }
+
+.readonly {
+    background-color: beige;
+}
+
+.number, .currency {
+    text-align: right;
+    min-width: 70px;
+}

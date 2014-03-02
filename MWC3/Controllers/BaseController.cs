@@ -194,20 +194,48 @@
                 list.Find(c => c.Id == item.ParentId).Name = item.Name;
             }
 
+            // add to viewdata
             ViewData["TransactionTypes"] = new SelectList(list.OrderBy(g => g.Name), "Id", "Name");
+        }
+
+        public void PopulateTransactionTypesList(int selectedId)
+        {
+            // get language code
+            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
+
+            // get transactiontypes
+            var list = this.Db.TransactionTypes.Where(g => g.ParentId == 0).ToList();
+
+            // get translations
+            var languageList = this.Db.TransactionTypes.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
+
+            // translate
+            foreach (var item in languageList)
+            {
+                list.Find(c => c.Id == item.ParentId).Name = item.Name;
+            }
+
+            // create selectlist
+            var exportList = new SelectList(list.OrderBy(g => g.Name), "Id", "Name", selectedId);
+
+            // add to viewdata
+            ViewData["TransactionTypes"] = exportList;
         }
 
         public void PopulateTransactionTypesList(bool goingIn)
         {
-            List<TransactionType> list;
-
+            // get language code
             LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
-            list = goingIn ? 
+
+            // get transactiontypes
+            var list = goingIn ? 
                 this.Db.TransactionTypes.Where(g => g.ParentId == 0 && g.Multiplier > 0).ToList() : 
                 this.Db.TransactionTypes.Where(g => g.ParentId == 0 && g.Multiplier < 0).ToList();
 
+            // get translations
             var languageList = this.Db.TransactionTypes.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
 
+            // translate
             foreach (var item in languageList)
             {
                 var x = list.FirstOrDefault(c => c.Id == item.ParentId);
@@ -217,6 +245,7 @@
                 }
             }
 
+            // add to viewdata
             ViewData["TransactionTypes"] = new SelectList(list.OrderBy(g => g.Name), "Id", "Name");
         }
 
@@ -234,17 +263,22 @@
                            };
                 list.Add(item);
             }
+
+            // add to viewdata
             ViewData["Years"] = new SelectList(list, "Value", "Text");
         }
 
         public void PopulateUserId()
         {
+            // add to viewdata
             ViewData["UserId"] = this.GetUserId();
         }
 
         public void PopulateBottleTypeList()
         {
             var list = Db.BottleTypes.ToList();
+
+            // add to viewdata
             ViewData["bottleTypes"] = new SelectList(list, "Id", "Name");
         }
     }

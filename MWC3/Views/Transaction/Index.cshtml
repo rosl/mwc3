@@ -1,11 +1,16 @@
-﻿@model IEnumerable<MWC3.Models.Transaction>
+﻿@using System.Globalization
+@model IEnumerable<MWC3.Models.Transaction>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Transactions</h2>
-
+<p>
+    filter: @Html.DropDownList("transactiontypeId", (SelectList)this.ViewData["TransactionTypes"], "Please Select a type" )
+    <span>transactions: @Html.Encode(this.Model.Count().ToString(CultureInfo.InvariantCulture))</span>
+</p>
+<p>
 <p>
     @Html.ActionLink("Create New In", "CreateIn") | @Html.ActionLink("Create New Out", "CreateOut")
 </p>
@@ -64,10 +69,12 @@
                 @Html.DisplayFor(modelItem => item.Alcohol)&nbsp;&#37;
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Wine.Business.Name)
+                @Html.DisplayFor(modelItem => item.Wine.Business.Name)<br/>
+                @Html.DisplayFor(modelItem => item.Wine.Business.City)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Business.Name)
+                @Html.DisplayFor(modelItem => item.Business.Name)<br/>
+                @Html.DisplayFor(modelItem => item.Business.City)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TransactionType.Name)
@@ -75,10 +82,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BottleType.Name)
             </td>
-            <td>
+            <td class="number">
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
-            <td>
+            <td class="currency">&euro;
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             @*<td>
@@ -94,11 +101,15 @@
                 @Html.DisplayFor(modelItem => item.TimeStamp)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })<br/>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })<br />
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
 
 </table>
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/Transactions/Index.js"></script>
+}
