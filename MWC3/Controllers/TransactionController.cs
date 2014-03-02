@@ -154,7 +154,7 @@ namespace MWC3.Controllers
                     transaction.WineId = myInTransaction.WineId;
                     transaction.Year = myInTransaction.Year;
                     transaction.BusinessId = myInTransaction.BusinessId;
-                    transaction.Price = 0;
+                    transaction.Price = myInTransaction.Price;
                     transaction.TotalPrice = myInTransaction.Price * transaction.Quantity;
                     transaction.UserId = this.GetUserId();
                     transaction.AddedBy = this.GetUserName();

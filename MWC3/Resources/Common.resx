@@ -125,6 +125,10 @@
     <value>Back to List</value>
     <comment>action</comment>
   </data>
+  <data name="BottleType" xml:space="preserve">
+    <value>BottleType</value>
+    <comment>header</comment>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
     <comment>action</comment>
@@ -183,6 +187,10 @@
   </data>
   <data name="TotalPrice" xml:space="preserve">
     <value>Total Price</value>
+    <comment>header</comment>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transaction</value>
     <comment>header</comment>
   </data>
   <data name="Wine" xml:space="preserve">
