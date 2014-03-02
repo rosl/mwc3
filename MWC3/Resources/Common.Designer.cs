@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resource.Common {
+namespace Resources {
     using System;
     
     

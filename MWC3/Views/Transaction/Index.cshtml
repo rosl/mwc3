@@ -12,21 +12,15 @@
 </p>
 <p>
 <p>
-    @Html.ActionLink("Create New In", "CreateIn") | @Html.ActionLink("Create New Out", "CreateOut")
+    @Html.ActionLink(Resources.Common.CreateIn, "CreateIn" ) | @Html.ActionLink(Resources.Common.CreateOut, "CreateOut")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("Wine")
+            @Html.DisplayName(Resources.Common.Wine)
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Year)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Alcohol)
-            </th>*@
         <th>
-            @Html.DisplayName("Producer")
+            @Html.DisplayName(Resources.Common.Producer)
         </th>
         <th>
             @Html.DisplayName("Distributor")
