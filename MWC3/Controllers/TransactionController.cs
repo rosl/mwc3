@@ -116,7 +116,7 @@ namespace MWC3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateIn([Bind(Include="Id,Quantity,TransactionTypeId,BusinessId,BottleTypeId,WineId,Year,Price,Date")] Transaction transaction)
+        public ActionResult CreateIn([Bind(Include="Id,Quantity,TransactionTypeId,BusinessId,BottleTypeId,WineId,Year,Price,Date,Comment")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +142,7 @@ namespace MWC3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOut([Bind(Include = "Id,Quantity,TransactionTypeId,TransactionId, Date")] Transaction transaction)
+        public ActionResult CreateOut([Bind(Include = "Id,Quantity,TransactionTypeId,TransactionId, Date,Comment")] Transaction transaction)
         {
             var transactionId = Request.Form["TransactionId"];
 
@@ -156,6 +156,7 @@ namespace MWC3.Controllers
                     transaction.BusinessId = myInTransaction.BusinessId;
                     transaction.Price = myInTransaction.Price;
                     transaction.TotalPrice = myInTransaction.Price * transaction.Quantity;
+                    transaction.Alcohol = myInTransaction.Alcohol;
                     transaction.UserId = this.GetUserId();
                     transaction.AddedBy = this.GetUserName();
                     transaction.TimeStamp = DateTime.Now;
@@ -198,7 +199,7 @@ namespace MWC3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Quantity,TransactionTypeId,UserId,BusinessId,BottleTypeId,WineId,Year,Price,Date,AddedBy,TimeStamp,Alcohol")] Transaction transaction)
+        public ActionResult Edit([Bind(Include="Id,Quantity,TransactionTypeId,UserId,BusinessId,BottleTypeId,WineId,Year,Price,Date,AddedBy,TimeStamp,Alcohol,Comment")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {

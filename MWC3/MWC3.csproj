@@ -321,6 +321,10 @@
     <Compile Include="Migrations\201403011312047_AddAlcohol.Designer.cs">
       <DependentUpon>201403011312047_AddAlcohol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403071514463_AddCommentToTransaction.cs" />
+    <Compile Include="Migrations\201403071514463_AddCommentToTransaction.Designer.cs">
+      <DependentUpon>201403071514463_AddCommentToTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BottleType.cs" />
@@ -447,6 +451,7 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.mk.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ms.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.nb.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.nl-NL.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.nl-BE.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.nl.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.no.js" />
@@ -478,6 +483,7 @@
     <Content Include="Scripts\site.jquery.lib.js" />
     <Content Include="Scripts\Transactions\CreateOut.js" />
     <Content Include="Scripts\Transactions\CreateIn.js" />
+    <Content Include="Scripts\Transactions\Edit.js" />
     <Content Include="Scripts\Transactions\Index.js" />
     <Content Include="Scripts\Wine\Create.js" />
     <Content Include="Scripts\_references.js" />
@@ -634,6 +640,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403011312047_AddAlcohol.resx">
       <DependentUpon>201403011312047_AddAlcohol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403071514463_AddCommentToTransaction.resx">
+      <DependentUpon>201403071514463_AddCommentToTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Account\Login.nl-nl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

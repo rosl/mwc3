@@ -16,6 +16,7 @@ namespace MWC3.Models
         public int WineId { get; set; }
         public int Year { get; set; }
         public decimal Alcohol { get; set; }
+        public string Comment { get; set; }
         //[DataType(DataType.Currency)]
         //[DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:c}")]
         public decimal Price { get; set; }

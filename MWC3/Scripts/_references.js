@@ -68,3 +68,5 @@
 /// <reference path="respond.matchmedia.addlistener.js" />
 /// <reference path="respond.js" />
 /// <reference path="transactions/index.js" />
+/// <reference path="transactions/edit.js" />
+/// <reference path="locales/bootstrap-datepicker.nl-nl.js" />

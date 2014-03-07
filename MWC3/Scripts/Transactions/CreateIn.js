@@ -96,6 +96,7 @@
         }
     },
     Initialize: function () {
+        $('.datepicker').datepicker();
         useWatermark();
         Create.HideWineForm();
         Create.SetupChangeBehavior();
@@ -106,6 +107,5 @@
 };
 
 $(document).ready(function () {
-    $('.datepicker').datepicker();
     Create.Initialize();
 });
