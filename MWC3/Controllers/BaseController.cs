@@ -5,7 +5,10 @@
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
-    
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     using MWC3.DAL;
     using MWC3.Models;
     using MWC3.Helpers;
@@ -13,6 +16,20 @@
     public class BaseController : Controller
     {
         public readonly ApplicationDbContext Db = new ApplicationDbContext();
+        public UserManager<ApplicationUser> UserManager { get; private set; }
+        public RoleManager<IdentityRole> RoleManager { get; private set; }
+
+        public BaseController()
+        {
+            UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(Db));
+            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(Db));
+        }
+
+        public BaseController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            UserManager = userManager;
+            RoleManager = roleManager;
+        }
 
         public string LanguageCode = string.Empty;
 

@@ -1,0 +1,62 @@
+﻿@using MWC3.Models
+
+@*@model ReviewViewModels*@
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Review</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        @{
+            int counter = 0;
+        }
+
+        @foreach (Review item in Model)
+        {
+            @Html.Hidden("Review[" + counter + "].Id", item.Id);
+            <div class="form-group">
+                @Html.Label("Wine", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Label(item.Wine.Name + " - " + item.Year)
+                </div>
+            </div>
+            counter++;
+        }
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="~/Scripts/Wine/Create.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap-multiselect.css" type="text/css" />
+    <style type="text/css">
+        .multiselect {
+            min-width: 400px;
+        }
+    </style>
+}

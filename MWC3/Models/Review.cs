@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MWC3.Models
+﻿namespace MWC3.Models
 {
     public class Review
     {
@@ -17,6 +12,7 @@ namespace MWC3.Models
 
         public int ReviewTypeId { get; set; }
 
+        public virtual Wine Wine { get; set; }
         public virtual ReviewType ReviewType { get; set; }
     }
 }
