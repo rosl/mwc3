@@ -189,6 +189,13 @@
             return RedirectToAction("Index");
         }
 
+        [HandleError]
+        public ActionResult TestMethod()
+        {
+            var x = 0;
+            var y = 4 / x;
+            return this.View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

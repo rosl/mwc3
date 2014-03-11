@@ -1,9 +1,27 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@model HandleErrorInfo
+
 
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = "ShowError";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h2>Some error occurred</h2>
+
+<div>
+    @if (Model != null)
+    {
+        <text>Error detail:</text>
+        <ul>
+            <li>Controller: @Model.ControllerName</li>
+            <li>Action: @Model.ActionName</li>
+            <li>Message: @Model.Exception.Message</li>
+            @if (HttpContext.Current.IsDebuggingEnabled)
+            {
+                <li>Exception.Data: @Model.Exception.Data</li>
+                <li>Exception.BaseException: @Model.Exception.GetBaseException()</li>
+            }
+        </ul>
+
+    }
+</div>
 

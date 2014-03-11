@@ -4,8 +4,13 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Web;
     using System.Web.Mvc;
 
+    using Elmah;
+
+    using Microsoft.Ajax.Utilities;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -13,6 +18,7 @@
     using MWC3.Models;
     using MWC3.Helpers;
 
+    [HandleError()]
     public class BaseController : Controller
     {
         public readonly ApplicationDbContext Db = new ApplicationDbContext();
@@ -29,6 +35,55 @@
         {
             UserManager = userManager;
             RoleManager = roleManager;
+        }
+
+        private static bool IsAjax(ExceptionContext filterContext)
+        {
+            return filterContext.HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest";
+        }
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            // Write error logging code here if you wish.
+            LogException(filterContext.Exception);
+
+            if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled)
+            {
+                return;
+            }
+
+            // if the request is AJAX return JSON else view.
+            if (IsAjax(filterContext))
+            {
+                //Because its a exception raised after ajax invocation
+                //Lets return Json
+                filterContext.Result = new JsonResult()
+                {
+                    Data = filterContext.Exception.Message,
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+
+                filterContext.ExceptionHandled = true;
+                filterContext.HttpContext.Response.Clear();
+            }
+            else
+            {
+                //Normal Exception
+                //So let it handle by its default ways.
+                base.OnException(filterContext);
+
+            }
+
+
+
+            //if want to get different of the request
+            //var currentController = (string)filterContext.RouteData.Values["controller"];
+            //var currentActionName = (string)filterContext.RouteData.Values["action"];
+        }
+
+        private static void LogException(Exception e)
+        {
+            var context = System.Web.HttpContext.Current;
+            ErrorLog.GetDefault(context).Log(new Error(e, context));
         }
 
         public string LanguageCode = string.Empty;
