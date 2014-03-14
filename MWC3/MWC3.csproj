@@ -236,6 +236,7 @@
     <Compile Include="Helpers\Dropdown.cs" />
     <Compile Include="Helpers\LanguageHelper.cs" />
     <Compile Include="Helpers\Static.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Migrations\201401051529575_InitialCreate.cs" />
     <Compile Include="Migrations\201401051529575_InitialCreate.Designer.cs">
       <DependentUpon>201401051529575_InitialCreate.cs</DependentUpon>

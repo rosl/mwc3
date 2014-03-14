@@ -8,12 +8,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
-using MWC3.Models;
+using WebApplication1.Models;
 
-namespace MWC3.Controllers
+namespace WebApplication1.Controllers
 {
-    using MWC3.DAL;
-
     [Authorize]
     public class AccountController : Controller
     {
@@ -80,13 +78,7 @@ namespace MWC3.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser()
-                           {
-                               UserName = model.UserName,
-                               FirstName = model.FirstName,
-                               LastName = model.LastName,
-                               Email = model.Email
-                           };
+                var user = new ApplicationUser() { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -215,7 +207,7 @@ namespace MWC3.Controllers
             if (user != null)
             {
                 await SignInAsync(user, isPersistent: false);
-                return RedirectToLocal("/");
+                return RedirectToLocal(returnUrl);
             }
             else
             {

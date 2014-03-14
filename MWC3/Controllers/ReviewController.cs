@@ -1,15 +1,30 @@
 ﻿namespace MWC3.Controllers
 {
     using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
+    using MWC3.DAL;
     using MWC3.Models;
-    
+
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
     public class ReviewController : BaseController
     {
+        public ReviewController()
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+        {
+        }
+
+        public ReviewController(UserManager<ApplicationUser> userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public UserManager<ApplicationUser> UserManager { get; private set; }
+
+
         //
         // GET: /Review/
         public ActionResult Index(int wineId, int year)
@@ -123,7 +138,7 @@
             }
         }
 
-        private List<ApplicationUser> FindReviewers()
+        private IEnumerable<ApplicationUser> FindReviewers()
         {
             var users = new List<ApplicationUser>();
             var userId = this.GetUserId();
@@ -133,6 +148,16 @@
             users.Add(this.UserManager.FindByName("RobertParker"));
 
             return users.Where(u => u != null).ToList();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && UserManager != null)
+            {
+                UserManager.Dispose();
+                UserManager = null;
+            }
+            base.Dispose(disposing);
         }
     }
 }

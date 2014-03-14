@@ -8,31 +8,30 @@
 
     using Elmah;
 
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-
     using MWC3.DAL;
     using MWC3.Models;
     using MWC3.Helpers;
 
-    [HandleError()]
+    [HandleError]
+    [Authorize(Roles = "admin")]
     public class BaseController : Controller
     {
         public readonly ApplicationDbContext Db = new ApplicationDbContext();
-        public UserManager<ApplicationUser> UserManager { get; private set; }
-        public RoleManager<IdentityRole> RoleManager { get; private set; }
 
-        public BaseController()
-        {
-            UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(Db));
-            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(Db));
-        }
+        //public UserManager<ApplicationUser> UserManager { get; private set; }
+        //public RoleManager<IdentityRole> RoleManager { get; private set; }
 
-        public BaseController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
-        {
-            UserManager = userManager;
-            RoleManager = roleManager;
-        }
+        //public BaseController()
+        //{
+        //    //UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(Db));
+        //    //RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(Db));
+        //}
+
+        //public BaseController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        //{
+        //    UserManager = userManager;
+        //    RoleManager = roleManager;
+        //}
 
         private static bool IsAjax(ExceptionContext filterContext)
         {
@@ -70,8 +69,6 @@
 
             }
 
-
-
             //if want to get different of the request
             //var currentController = (string)filterContext.RouteData.Values["controller"];
             //var currentActionName = (string)filterContext.RouteData.Values["action"];
@@ -103,15 +100,18 @@
         public string GetUserId()
         {
             var userId = string.Empty;
-            if (User != null && User.Identity.IsAuthenticated)
+            
+            if (this.User == null || !this.User.Identity.IsAuthenticated)
             {
-                var userName = this.GetUserName();
-                var user = Db.Users.FirstOrDefault(x => userName != null && x.UserName == userName);
-                if (user != null)
-                {
-                    userId = user.Id;
-                }
+                return userId;
             }
+            
+            var user = this.Db.Users.FirstOrDefault(x => this.User.Identity.Name != null && x.UserName == this.User.Identity.Name);
+            if (user != null)
+            {
+                userId = user.Id;
+            }
+            
             return userId;
         }
 
