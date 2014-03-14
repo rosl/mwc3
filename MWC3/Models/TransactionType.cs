@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MWC3.Models
+﻿namespace MWC3.Models
 {
+    using System;
+    using System.Collections.Generic;
+
     public class TransactionType
     {
         public int Id { get; set; }

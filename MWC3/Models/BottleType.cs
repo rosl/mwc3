@@ -1,9 +1,8 @@
 ﻿namespace MWC3.Models
 {
+    using System.ComponentModel;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
     public class BottleType
     {
         public int Id { get; set; }

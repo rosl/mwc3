@@ -2,18 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public class Wine
     {
-        //public Wine()
-        //{
-        //    this.Grapes = new Collection<Grape>();
-        //}
-
-
         public int Id { get; set; }
         public string Name { get; set; }
         public int? RegionId { get; set; }

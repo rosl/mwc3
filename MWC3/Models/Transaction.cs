@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace MWC3.Models
+﻿namespace MWC3.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
