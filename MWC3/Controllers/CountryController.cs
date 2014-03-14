@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using MWC3.Models;
-using MWC3.DAL;
-
-namespace MWC3.Controllers
+﻿namespace MWC3.Controllers
 {
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+    using MWC3.Models;
+
     public class CountryController : BaseController
     {
         // GET: /Country/

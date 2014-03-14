@@ -1,13 +1,12 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-using MWC3.Models;
-
-namespace MWC3.Controllers
+﻿namespace MWC3.Controllers
 {
     using System;
-    using System.Security.Cryptography.X509Certificates;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+
+    using MWC3.Models;
 
     public class RegionController : BaseController
     {

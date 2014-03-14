@@ -17,17 +17,17 @@ namespace MWC3.Controllers
     [Authorize]
     public class AccountController : BaseController
     {
-        public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
-        {
-        }
+        //public AccountController()
+        //    : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+        //{
+        //}
 
-        public AccountController(UserManager<ApplicationUser> userManager)
-        {
-            UserManager = userManager;
-        }
+        //public AccountController(UserManager<ApplicationUser> userManager)
+        //{
+        //    UserManager = userManager;
+        //}
 
-        public UserManager<ApplicationUser> UserManager { get; private set; }
+        //public UserManager<ApplicationUser> UserManager { get; private set; }
 
         //
         // GET: /Account/Login
@@ -215,7 +215,7 @@ namespace MWC3.Controllers
             if (user != null)
             {
                 await SignInAsync(user, isPersistent: false);
-                return RedirectToLocal(returnUrl);
+                return RedirectToLocal("/");
             }
             else
             {
@@ -322,7 +322,7 @@ namespace MWC3.Controllers
             if (disposing && UserManager != null)
             {
                 UserManager.Dispose();
-                UserManager = null;
+                // UserManager = null;
             }
             base.Dispose(disposing);
         }

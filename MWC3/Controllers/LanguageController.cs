@@ -1,8 +1,6 @@
-﻿using System.Web.Mvc;
-
-namespace MWC3.Controllers
+﻿namespace MWC3.Controllers
 {
-    using System.Globalization;
+    using System.Web.Mvc;
 
     public class LanguageController : BaseController
     {

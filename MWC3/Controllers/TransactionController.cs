@@ -1,14 +1,12 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-using MWC3.Models;
-
-namespace MWC3.Controllers
+﻿namespace MWC3.Controllers
 {
-    using System.Diagnostics;
+    using MWC3.Models;
+    using System;
+    using System.Data.Entity;
     using System.Globalization;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
 
     [Authorize]
     public class TransactionController : BaseController
