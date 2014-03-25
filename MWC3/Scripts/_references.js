@@ -70,3 +70,4 @@
 /// <reference path="transactions/edit.js" />
 /// <reference path="locales/bootstrap-datepicker.nl-nl.js" />
 /// <reference path="modernizr-2.7.2.js" />
+/// <reference path="cellar/index.js" />

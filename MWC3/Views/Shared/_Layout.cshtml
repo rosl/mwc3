@@ -5,7 +5,7 @@
     var userId = string.Empty;
     if (Request.IsAuthenticated)
     {
-        userId = Static.GetUserId(User.Identity.Name);
+        userId = UserHelper.GetUserId(User.Identity.Name);
     }
 }
 <!DOCTYPE html>
@@ -37,6 +37,7 @@
                     <li>@Html.ActionLink(Resources.Shared.Layout.Home, "Index", "Home")</li>
                     <li>@Html.ActionLink(Resources.Shared.Layout.About, "About", "Home")</li>
                     <li>@Html.ActionLink(Resources.Shared.Layout.Contact, "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Cellar", "Index", "Cellar")</li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">@Resources.Shared.Layout.Administration<b class="caret"></b></a>
                         <ul class="dropdown-menu">

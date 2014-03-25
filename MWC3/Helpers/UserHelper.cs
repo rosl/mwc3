@@ -31,7 +31,7 @@
         {
             var userId = String.Empty;
 
-            var user = Static.Db.Users.FirstOrDefault(x => userName != null && x.UserName == userName);
+            var user = Db.Users.FirstOrDefault(x => userName != null && x.UserName == userName);
             
             if (user != null)
             {

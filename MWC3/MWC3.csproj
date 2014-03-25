@@ -208,11 +208,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\BaseApiController.cs" />
     <Compile Include="Controllers\Api\BusinessController.cs" />
+    <Compile Include="Controllers\Api\CellarController.cs" />
     <Compile Include="Controllers\Api\QualificationController.cs" />
     <Compile Include="Controllers\Api\RegionController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BottleTypeController.cs" />
     <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\CellarController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\EmptyController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -337,6 +339,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BottleType.cs" />
     <Compile Include="Models\Business.cs" />
+    <Compile Include="Models\CellarViewModels.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Grape.cs" />
     <Compile Include="Models\GrapeColor.cs" />
@@ -420,6 +423,7 @@
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Cellar\Index.js" />
     <Content Include="Scripts\Grapes\Index.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
@@ -576,6 +580,7 @@
     <Content Include="Views\Review\Create.cshtml" />
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Wine\TestMethod.cshtml" />
+    <Content Include="Views\Cellar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
