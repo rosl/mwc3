@@ -420,6 +420,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.sticky-footer-navbar.css" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -581,6 +582,8 @@
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Wine\TestMethod.cshtml" />
     <Content Include="Views\Cellar\Index.cshtml" />
+    <Content Include="Views\Shared\Cellar\_CurrentWines.cshtml" />
+    <Content Include="Views\Shared\Cellar\_Transactions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,15 +17,14 @@
         public ActionResult Index()
         {
             this.PopulateCountryList();
-            var qualifications = this.Db.Qualifications;
+            var qualifications = this.Db.Qualifications.OrderBy(x => x.Country.Name).ThenBy(x => x.Region.Name).ThenBy(x => x.Name);
             return View(qualifications.ToList());
         }
         [Route("Qualifiaction/{id}")]
         public ActionResult Index(int id)
         {
-            // var qualifications = db.Qualifications.Include(q => q.Country).Include(q => q.Region);
             this.PopulateCountryList(id);
-            var qualifications = this.Db.Qualifications.Where(x=>x.CountryId == id);
+            var qualifications = this.Db.Qualifications.Where(x => x.CountryId == id).OrderBy(x => x.Country.Name).ThenBy(x => x.Region.Name).ThenBy(x => x.Name); 
             return View(qualifications.ToList());
         }
 

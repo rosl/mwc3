@@ -1,8 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
-
-namespace MWC3
+﻿namespace MWC3
 {
+    using System.Web.Optimization;
     public class BundleConfig
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
@@ -28,6 +26,7 @@ namespace MWC3
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.sticky-footer-navbar.css",
                       "~/Content/site.css"));
         }
     }
