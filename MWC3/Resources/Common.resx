@@ -121,12 +121,20 @@
     <value>Added By</value>
     <comment>header</comment>
   </data>
+  <data name="Alcohol" xml:space="preserve">
+    <value>Alcohol</value>
+    <comment>header</comment>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Back to List</value>
     <comment>action</comment>
   </data>
   <data name="BottleType" xml:space="preserve">
     <value>BottleType</value>
+    <comment>header</comment>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
     <comment>header</comment>
   </data>
   <data name="Create" xml:space="preserve">
@@ -173,8 +181,20 @@
     <value>Producer</value>
     <comment>header</comment>
   </data>
+  <data name="Qualification" xml:space="preserve">
+    <value>Qualification</value>
+    <comment>header</comment>
+  </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
+    <comment>header</comment>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Region</value>
+    <comment>header</comment>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>Stock</value>
     <comment>header</comment>
   </data>
   <data name="Timestamp" xml:space="preserve">
@@ -195,6 +215,10 @@
   </data>
   <data name="Wine" xml:space="preserve">
     <value>Wine</value>
+    <comment>header</comment>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
     <comment>header</comment>
   </data>
 </root>

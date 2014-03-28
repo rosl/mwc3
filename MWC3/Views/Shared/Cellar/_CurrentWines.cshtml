@@ -1,1 +1,62 @@
-﻿<h4>Current Wines</h4>
+﻿@model IEnumerable<MWC3.Models.CellarWineViewModel>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName(Resources.Common.Wine)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Year)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Alcohol)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Region)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Country)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Producer)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Qualification)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Stock)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WineName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alcohol)&nbsp;&#37;
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProducerName), @Html.DisplayFor(modelItem => item.ProducerCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qualification)
+            </td>
+            <td class="number">
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+        </tr>
+    }
+
+</table>

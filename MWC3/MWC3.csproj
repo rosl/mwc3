@@ -382,6 +382,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LoginPartial.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\CellarService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
