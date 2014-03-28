@@ -1,10 +1,12 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
 
 @if (Request.IsAuthenticated)
 {
     var userName = User.Identity.GetUserName();
-    var userRoles = MWC3.Helpers.UserHelper.GetUserRoles(userName);
-    var role = userRoles.First().Role.Name;
+    // var userRoles = MWC3.Helpers.UserHelper.GetUserRoles(userName);
+    // var role = userRoles.First().RoleId;
+    var role = MWC3.Helpers.UserHelper.GetFirstRole(userName);
     
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
@@ -12,7 +14,7 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink(Resources.Shared.Layout.Heading + " " + userName + "(" + role + ")" +  "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink(Resources.Shared.Layout.Heading + " " + userName + "(" + role.RoleId + ")" +  "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">@Resources.Shared.LoginPartial.LogOff</a></li>
     </ul>
