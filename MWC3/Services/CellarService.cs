@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MWC3.Services
+﻿namespace MWC3.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     using MWC3.DAL;
     using MWC3.Models;
 
@@ -24,7 +22,7 @@ namespace MWC3.Services
                 // else add stock
                 if (wine == null)
                 {
-                    wineList.Add(this.Map(new CellarWineViewModel(), transaction));
+                    wineList.Add(Map(new CellarWineViewModel(), transaction));
                 }
                 else
                 {
@@ -35,7 +33,13 @@ namespace MWC3.Services
             return wineList;
         }
 
-        private CellarWineViewModel Map(CellarWineViewModel wine, Transaction transaction)
+        public IEnumerable<CellarTransactionViewModel> GetTransactionsByUserId(string userId)
+        {
+            var list = this.db.Transactions.Where(t => t.UserId == userId).ToList();
+            return list.Select(transaction => Map(new CellarTransactionViewModel(), transaction)).ToList();
+        }
+
+        private static CellarWineViewModel Map(CellarWineViewModel wine, Transaction transaction)
         {
             wine.WineId = transaction.WineId;
             wine.WineName = transaction.Wine.Name;
@@ -53,6 +57,29 @@ namespace MWC3.Services
             wine.Alcohol = transaction.Alcohol;
 
             return wine;
+        }
+
+        private static CellarTransactionViewModel Map(CellarTransactionViewModel cellarTransaction, Transaction transaction)
+        {
+            cellarTransaction.WineId = transaction.WineId;
+            cellarTransaction.WineName = transaction.Wine.Name;
+            cellarTransaction.Country = transaction.Wine.Country.Name;
+            cellarTransaction.CountryId = transaction.Wine.CountryId;
+            cellarTransaction.Region = transaction.Wine.Region.Name;
+            cellarTransaction.RegionId = transaction.Wine.RegionId;
+            cellarTransaction.Qualification = transaction.Wine.Qualification.Name;
+            cellarTransaction.QualificationId = transaction.Wine.QualificationId;
+            cellarTransaction.ProducerName = transaction.Wine.Business.Name;
+            cellarTransaction.ProducerId = transaction.Wine.BusinessId;
+            cellarTransaction.ProducerCity = transaction.Wine.Business.City;
+            cellarTransaction.Year = transaction.Year;
+            cellarTransaction.Alcohol = transaction.Alcohol;
+            cellarTransaction.BottleTypeId = transaction.BottleTypeId;
+            cellarTransaction.BottleTypeName = transaction.BottleType.Name;
+            cellarTransaction.DistributorId = transaction.BusinessId;
+            cellarTransaction.DistributorName = transaction.Business.Name;
+
+            return cellarTransaction;
         }
     }
 }
