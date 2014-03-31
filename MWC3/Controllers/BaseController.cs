@@ -44,7 +44,10 @@
 
             if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled)
             {
-                return;
+                // create redirect
+                this.Redirect("/error/");
+
+                return ;
             }
 
             // if the request is AJAX return JSON else view.

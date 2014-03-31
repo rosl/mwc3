@@ -30,6 +30,17 @@
                 else
                 {
                     wine.Stock = wine.Stock + transaction.Quantity * transaction.TransactionType.Multiplier;
+                    wine.TotalPrice = wine.TotalPrice
+                                      + (transaction.Quantity * transaction.Price
+                                         * transaction.TransactionType.Multiplier);
+                }
+            }
+
+            foreach (var cellarWineViewModel in wineList)
+            {
+                if (cellarWineViewModel.TotalPrice < 0)
+                {
+                    cellarWineViewModel.TotalPrice = 0;
                 }
             }
 
@@ -89,6 +100,7 @@
             wine.ProducerCity = transaction.Wine.Business.City;
             wine.Year = transaction.Year;
             wine.Alcohol = transaction.Alcohol;
+            wine.TotalPrice = transaction.Quantity * transaction.Price;
             
             return wine;
         }

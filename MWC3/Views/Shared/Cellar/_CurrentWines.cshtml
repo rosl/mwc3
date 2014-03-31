@@ -30,6 +30,9 @@
         <th>
             @Html.DisplayName(Resources.Common.Stock)
         </th>
+        <th>
+            @Html.DisplayName("Value")
+        </th>
 
     </tr>
 
@@ -63,6 +66,9 @@
             </td>
             <td class="number">
                 @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td class="currency">&euro; 
+                @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
         </tr>
     }
