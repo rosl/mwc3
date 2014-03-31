@@ -2,6 +2,25 @@
 
 @{
     ViewBag.Title = "Oops. An error occurrred!";
+    var exception = (Exception)TempData["Exception"];
 }
 
 <h2>Error</h2>
+
+@if (exception != null)
+{
+    <div>
+        <dl>
+            <dt>Message:</dt>
+            <dd>@exception.Message</dd>
+        </dl>
+        <dl>
+            <dt>Source:</dt>
+            <dd>@exception.Source</dd>
+        </dl>
+        <dl>
+            <dt>Stacktrace:</dt>
+            <dd>@exception.StackTrace</dd>
+        </dl>
+    </div>
+}

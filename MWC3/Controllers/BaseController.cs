@@ -44,6 +44,8 @@
 
             if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled)
             {
+                TempData["Exception"] = filterContext.Exception;
+
                 // create redirect
                 this.Redirect("/error/");
 
