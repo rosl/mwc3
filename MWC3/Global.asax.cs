@@ -25,7 +25,7 @@
 
         protected void Application_AcquireRequestState(object sender, EventArgs e)
         {
-            LanguageHelper.SetCurrentCulture(new HttpContextWrapper(HttpContext.Current));
+            LanguageHelper.SetCurrentCulture();
         }
 
     }

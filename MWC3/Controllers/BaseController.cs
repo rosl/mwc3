@@ -136,7 +136,7 @@
 
         public void PopulateCountryList()
         {
-            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie();
             var list = this.Db.Countries.Where(g => g.ParentId == 0).ToList();
 
             var languageList = this.Db.Countries.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
@@ -151,7 +151,7 @@
 
         public void PopulateCountryList(int id)
         {
-            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie();
             var list = this.Db.Countries.Where(g => g.ParentId == 0).ToList();
 
             var languageList = this.Db.Countries.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
@@ -217,7 +217,7 @@
 
         public void PopulateWineColorList()
         {
-            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie();
             var list = this.Db.WineColors.Where(g => g.ParentId == 0).OrderBy(g => g.Name).ToList();
 
             var wineColorList = this.Db.WineColors.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
@@ -253,7 +253,7 @@
 
         public void PopulateTransactionTypesList()
         {
-            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie();
             var list = this.Db.TransactionTypes.Where(g => g.ParentId == 0).ToList();
 
             var languageList = this.Db.TransactionTypes.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == LanguageCode.ToLower()).ToList();
@@ -270,7 +270,7 @@
         public void PopulateTransactionTypesList(int selectedId)
         {
             // get language code
-            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie();
 
             // get transactiontypes
             var list = this.Db.TransactionTypes.Where(g => g.ParentId == 0).ToList();
@@ -294,7 +294,7 @@
         public void PopulateTransactionTypesList(bool goingIn)
         {
             // get language code
-            LanguageCode = LanguageHelper.GetLanguageFromCookie(this.HttpContext);
+            LanguageCode = LanguageHelper.GetLanguageFromCookie();
 
             // get transactiontypes
             var list = goingIn ? 

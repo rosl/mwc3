@@ -21,8 +21,9 @@ namespace MWC3.Helpers
         const string CultureCookieName = "_cc";
         const string LanguageCookieName = "_lc";
 
-        public static void SetLanguageToCookie(HttpContextBase context)
+        public static void SetLanguageToCookie()
         {
+            var context = HttpContext.Current;
             var selectedLanguageCode = context.Request.QueryString["lc"];
             var cookie = context.Request.Cookies[LanguageCookieName];
 
@@ -54,8 +55,9 @@ namespace MWC3.Helpers
         }
 
 
-        public static string GetLanguageFromCookie(HttpContextBase context)
+        public static string GetLanguageFromCookie()
         {
+            var context = HttpContext.Current;
             var currentLanguageCode = string.Empty;
 
             // get language code from cookie
@@ -78,8 +80,9 @@ namespace MWC3.Helpers
             return DefaultLanguageCode;
         }
 
-        public static void SetCultureToCookie(HttpContextBase context)
+        public static void SetCultureToCookie()
         {
+            var context = HttpContext.Current;
             var selectedCode = context.Request.QueryString["cc"];
             var cookie = context.Request.Cookies[CultureCookieName];
 
@@ -114,17 +117,18 @@ namespace MWC3.Helpers
             Thread.CurrentThread.CurrentUICulture = ci;
         }
 
-        public static void SetCurrentCulture(HttpContextBase context)
+        public static void SetCurrentCulture()
         {
-            var cultureCode = GetCultureFromCookie(context);
+            var cultureCode = GetCultureFromCookie();
             var ci = CultureInfo.GetCultureInfo(cultureCode);
             // Thread.CurrentThread.CurrentCulture = ci;
             Thread.CurrentThread.CurrentUICulture = ci;
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(ci.Name);
         }
 
-        public static string GetCultureFromCookie(HttpContextBase context)
+        public static string GetCultureFromCookie()
         {
+            var context = HttpContext.Current;
             // const string CookieName = "_cc";
             var currentCode = string.Empty;
 

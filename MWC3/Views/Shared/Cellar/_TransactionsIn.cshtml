@@ -1,1 +1,100 @@
-﻿<h4>My Transactions In</h4>
+﻿@model IEnumerable<MWC3.Models.CellarTransactionViewModel>
+@{
+    var counter = 0;
+}
+<div>
+    <div style="float: left; margin-right: 20px;width: auto">
+        <dl>
+            <dt class="currency">Value:</dt>
+            <dd class="currency">&euro; @Model.Sum(x => x.TotalPrice)</dd>
+        </dl>
+    </div>
+    <div style="float: left; margin-right: 20px;width: auto">
+        <dl>
+            <dt class="number">Bottles:</dt>
+            <dd class="number">@Model.Sum(x => x.Quantity)</dd>
+        </dl>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>#</th>
+        <th>
+            @Html.DisplayName(Resources.Common.Wine)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Producer)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Distributor)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Transaction)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.BottleType)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Quantity)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Price)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.TotalPrice)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Date)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        counter++;
+
+        <tr>
+            <td>
+                @counter
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WineName)
+                <br />
+                @Html.DisplayFor(modelItem => item.Year)
+                <br />
+                @Html.DisplayFor(modelItem => item.Alcohol)&nbsp;&#37;
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProducerName)<br />
+                @Html.DisplayFor(modelItem => item.ProducerCity)<br />
+                @Html.DisplayFor(modelItem => item.ProducerCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistributorName)<br />
+                @Html.DisplayFor(modelItem => item.DistributorCity)<br />
+                @Html.DisplayFor(modelItem => item.DistributorCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BottleTypeName)
+            </td>
+            <td class="number">
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td class="currency">
+                &euro;
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td class="currency">
+                &euro;
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @item.Date.ToShortDateString()
+            </td>
+        </tr>
+    }
+
+</table>

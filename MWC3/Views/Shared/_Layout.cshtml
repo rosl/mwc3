@@ -1,7 +1,7 @@
 ﻿@using System.Threading
 @using MWC3.Helpers
 @{
-    LanguageHelper.SetCurrentCulture(this.Context);
+    LanguageHelper.SetCurrentCulture();
     var userId = string.Empty;
     if (Request.IsAuthenticated)
     {

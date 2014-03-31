@@ -8,9 +8,9 @@
         // GET: /Language/
         public RedirectResult Index(string languageCode)
         {
-            Helpers.LanguageHelper.SetLanguageToCookie(this.HttpContext);
-            Helpers.LanguageHelper.SetCultureToCookie(this.HttpContext);
-            Helpers.LanguageHelper.SetCurrentCulture(this.HttpContext);
+            Helpers.LanguageHelper.SetLanguageToCookie();
+            Helpers.LanguageHelper.SetCultureToCookie();
+            Helpers.LanguageHelper.SetCurrentCulture();
 
             // Session["Culture"] = new CultureInfo(Helpers.LanguageHelper.GetCultureFromCookie(this.HttpContext));
 

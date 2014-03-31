@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<MWC3.Models.CellarWineViewModel>
+@{
+    var counter = 0;
+}
 
 <table class="table">
     <tr>
+        <th>#</th>
         <th>
             @Html.DisplayName(Resources.Common.Wine)
         </th>
@@ -31,7 +35,11 @@
 
     @foreach (var item in Model)
     {
+        counter++;
         <tr>
+            <td>
+                @counter
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.WineName)
             </td>
