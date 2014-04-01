@@ -577,6 +577,8 @@
     <Content Include="Views\Shared\Cellar\_TransactionsIn.cshtml" />
     <Content Include="Views\Shared\Cellar\_TransactionsOut.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Shared\Cellar\_AddTransactionIn.cshtml" />
+    <Content Include="Views\Shared\Cellar\_SaveTransaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
