@@ -10,7 +10,7 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input, select, textarea{
+input, select, textarea {
     width: 100%;
     max-width: 400px;
 }
@@ -90,5 +90,13 @@ input[type="radio"], input[type="checkbox"] {
 
 .number, .currency {
     text-align: right;
+    -moz-min-width: 70px;
+    -ms-min-width: 70px;
+    -o-min-width: 70px;
+    -webkit-min-width: 70px;
     min-width: 70px;
 }
+
+.btn-toolbar {
+    text-align: center;
+}​

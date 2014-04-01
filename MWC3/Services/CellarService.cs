@@ -139,6 +139,7 @@
             cellarTransaction.Quantity = transaction.Quantity;
             cellarTransaction.Price = transaction.Price;
             cellarTransaction.TotalPrice = transaction.Quantity * transaction.Price;
+            cellarTransaction.Multiplier = transaction.TransactionType.Multiplier;
 
             return cellarTransaction;
         }

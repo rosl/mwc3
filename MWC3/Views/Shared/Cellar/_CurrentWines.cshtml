@@ -33,6 +33,7 @@
         <th>
             @Html.DisplayName("Value")
         </th>
+        <th></th>
 
     </tr>
 
@@ -70,6 +71,7 @@
             <td class="currency">&euro; 
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
+            <td><a href="#" onclick="Load.TransactionsByWine(@item.WineId)">Details</a></td>
         </tr>
     }
 

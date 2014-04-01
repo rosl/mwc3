@@ -1,1 +1,182 @@
-﻿<h4>My Transactions</h4>
+﻿@model IEnumerable<MWC3.Models.CellarTransactionViewModel>
+@{
+    var counter = 0;
+}
+
+<h4>In</h4>
+<table class="table">
+    <tr>
+        <th>#</th>
+        <th>
+            @Html.DisplayName(Resources.Common.Wine)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Producer)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Distributor)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Transaction)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.BottleType)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Quantity)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Price)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.TotalPrice)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Date)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Multiplier > 0)
+        {
+            counter++;
+
+            <tr>
+                <td>
+                    @counter
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WineName)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.Year)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.Alcohol)&nbsp;&#37;
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProducerName)<br />
+                    @Html.DisplayFor(modelItem => item.ProducerCity)<br />
+                    @Html.DisplayFor(modelItem => item.ProducerCountry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DistributorName)<br />
+                    @Html.DisplayFor(modelItem => item.DistributorCity)<br />
+                    @Html.DisplayFor(modelItem => item.DistributorCountry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransactionTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BottleTypeName)
+                </td>
+                <td class="number">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td class="currency">
+                    &euro;
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td class="currency">
+                    &euro;
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @item.Date.ToShortDateString()
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+@{
+    counter = 0;
+}
+
+<h4>Out</h4>
+<table class="table">
+    <tr>
+        <th>#</th>
+        <th>
+            @Html.DisplayName(Resources.Common.Wine)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Producer)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Distributor)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Transaction)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.BottleType)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Quantity)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Price)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.TotalPrice)
+        </th>
+        <th>
+            @Html.DisplayName(Resources.Common.Date)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Multiplier < 0)
+        {
+            counter++;
+
+            <tr>
+                <td>
+                    @counter
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WineName)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.Year)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.Alcohol)&nbsp;&#37;
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProducerName)<br />
+                    @Html.DisplayFor(modelItem => item.ProducerCity)<br />
+                    @Html.DisplayFor(modelItem => item.ProducerCountry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DistributorName)<br />
+                    @Html.DisplayFor(modelItem => item.DistributorCity)<br />
+                    @Html.DisplayFor(modelItem => item.DistributorCountry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransactionTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BottleTypeName)
+                </td>
+                <td class="number">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td class="currency">
+                    &euro;
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td class="currency">
+                    &euro;
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @item.Date.ToShortDateString()
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<a href="#" onclick="Load.CurrentWines()">Back to List</a>
