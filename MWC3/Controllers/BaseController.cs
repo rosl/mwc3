@@ -47,7 +47,7 @@
                 TempData["Exception"] = filterContext.Exception;
 
                 // create redirect
-                this.Redirect("/error/");
+                filterContext.Result = RedirectToAction("Index", "Error");
 
                 return ;
             }

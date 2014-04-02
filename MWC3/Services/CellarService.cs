@@ -2,16 +2,16 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
 
     using MWC3.DAL;
     using MWC3.Helpers;
     using MWC3.Models;
+    using MWC3.Repositories;
 
     public class CellarService
     {
         private readonly ApplicationDbContext db = new ApplicationDbContext();
-        
+
 
         public IEnumerable<CellarWineViewModel> GetWinesByUser(string userId)
         {
@@ -44,25 +44,36 @@
                 }
             }
 
+            wineList = this.TranslateCountry(wineList.ToList()).ToList();
+
             return wineList;
         }
 
         public IEnumerable<CellarTransactionViewModel> GetTransactionsByUserId(string userId)
         {
             var list = this.db.Transactions.Where(t => t.UserId == userId).ToList();
-            return list.Select(transaction => Map(new CellarTransactionViewModel(), transaction)).ToList();
+            var newList = list.Select(transaction => Map(new CellarTransactionViewModel(), transaction));
+            newList = this.TransLateTransaction(newList.ToList());
+            newList = this.TranslateCountry(newList.ToList());
+            return this.TransLateTransaction(newList.ToList());
         }
 
         public IEnumerable<CellarTransactionViewModel> GetTransactionsInByUserId(string userId)
         {
             var list = this.db.Transactions.Where(t => t.UserId == userId && t.TransactionType.Multiplier > 0).ToList();
-            return this.TransLateTransaction(list.Select(transaction => Map(new CellarTransactionViewModel(), transaction)).ToList());
+            var newList = list.Select(transaction => Map(new CellarTransactionViewModel(), transaction));
+            newList = this.TransLateTransaction(newList.ToList());
+            newList = this.TranslateCountry(newList.ToList());
+            return this.TransLateTransaction(newList.ToList());
         }
 
         public IEnumerable<CellarTransactionViewModel> GetTransactionsOutByUserId(string userId)
         {
-            var list = this.db.Transactions.Where(t => t.UserId == userId && t.TransactionType.Multiplier <0).ToList();
-            return this.TransLateTransaction(list.Select(transaction => Map(new CellarTransactionViewModel(), transaction)).ToList());
+            var list = this.db.Transactions.Where(t => t.UserId == userId && t.TransactionType.Multiplier < 0).ToList();
+            var newList = list.Select(transaction => Map(new CellarTransactionViewModel(), transaction));
+            newList = this.TransLateTransaction(newList.ToList());
+            newList = this.TranslateCountry(newList.ToList());
+            return this.TransLateTransaction(newList.ToList());
         }
 
         private IEnumerable<CellarTransactionViewModel> TransLateTransaction(List<CellarTransactionViewModel> list)
@@ -71,16 +82,57 @@
             var languageCode = LanguageHelper.GetLanguageFromCookie();
             // get translations
             var languageList = this.db.TransactionTypes.Where(g => g.ParentId > 0 && g.LanguageCode.ToLower() == languageCode.ToLower()).ToList();
-
             // translate
             foreach (var item in languageList)
             {
+                // list.Find(c => c.TransactionTypeId == item.ParentId).TransactionTypeName = item.Name;
+
                 var foundList = list.Where(c => item != null && c.TransactionTypeId == item.ParentId);
                 foreach (var cellarTransactionViewModel in foundList)
                 {
                     cellarTransactionViewModel.TransactionTypeName = item.Name;
                 }
             }
+            return list;
+        }
+
+        private IEnumerable<CellarTransactionViewModel> TranslateCountry(List<CellarTransactionViewModel> list)
+        {
+            // get language
+            var languageCode = LanguageHelper.GetLanguageFromCookie();
+            // get translations
+            var countryList = CacheRepository.GetCountries().Where(c => c.ParentId > 0 && c.LanguageCode.ToLower() == languageCode.ToLower());
+            // translate
+            foreach (var country in countryList)
+            {
+                var x = list.Find(c => c.CountryId == country.ParentId);
+                if (x != null) { x.Country = country.Name; }
+
+                x = list.Find(c => c.ProducerCountryId == country.ParentId);
+                if (x != null) { x.ProducerCountry = country.Name; }
+
+                x = list.Find(c => c.DistributorCountryId == country.ParentId);
+                if (x != null) { x.DistributorCountry = country.Name; }
+
+            }
+            // return
+            return list;
+        }
+
+        private IEnumerable<CellarWineViewModel> TranslateCountry(List<CellarWineViewModel> list)
+        {
+            var languageCode = LanguageHelper.GetLanguageFromCookie();
+            var countryList = CacheRepository.GetCountries().Where(c => c.ParentId > 0 && c.LanguageCode.ToLower() == languageCode.ToLower());
+
+            foreach (var country in countryList)
+            {
+                var x = list.Find(c => c.CountryId == country.ParentId);
+                if (x != null) { x.Country = country.Name; }
+
+                x = list.Find(c => c.ProducerCountryId == country.ParentId);
+                if (x != null) { x.ProducerCountry = country.Name; }
+            }
+
             return list;
         }
 
@@ -98,10 +150,12 @@
             wine.ProducerName = transaction.Wine.Business.Name;
             wine.ProducerId = transaction.Wine.BusinessId;
             wine.ProducerCity = transaction.Wine.Business.City;
+            wine.ProducerCountryId = transaction.Wine.Business.CountryId;
+            wine.ProducerCountry = transaction.Wine.Business.Country.Name;
             wine.Year = transaction.Year;
             wine.Alcohol = transaction.Alcohol;
             wine.TotalPrice = transaction.Quantity * transaction.Price;
-            
+
             return wine;
         }
 
@@ -118,6 +172,7 @@
             cellarTransaction.ProducerName = transaction.Wine.Business.Name;
             cellarTransaction.ProducerId = transaction.Wine.BusinessId;
             cellarTransaction.ProducerCity = transaction.Wine.Business.City;
+            cellarTransaction.ProducerCountryId = transaction.Wine.Business.CountryId;
             cellarTransaction.ProducerCountry = transaction.Wine.Business.Country.Name;
             cellarTransaction.Year = transaction.Year;
             cellarTransaction.Alcohol = transaction.Alcohol;
@@ -132,6 +187,7 @@
             if (transaction.Business.Country != null)
             {
                 cellarTransaction.DistributorCountry = transaction.Business.Country.Name;
+                cellarTransaction.DistributorCountryId = transaction.Business.CountryId;
             }
             cellarTransaction.Date = transaction.Date.Date;
             cellarTransaction.TransactionTypeId = transaction.TransactionTypeId;

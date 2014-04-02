@@ -121,6 +121,10 @@
     <value>Added By</value>
     <comment>header</comment>
   </data>
+  <data name="AddTransaction" xml:space="preserve">
+    <value>Add Transaction</value>
+    <comment>header</comment>
+  </data>
   <data name="Alcohol" xml:space="preserve">
     <value>Alcohol</value>
     <comment>header</comment>
@@ -131,6 +135,10 @@
   </data>
   <data name="BottleType" xml:space="preserve">
     <value>BottleType</value>
+    <comment>header</comment>
+  </data>
+  <data name="Cellar" xml:space="preserve">
+    <value>Cellar</value>
     <comment>header</comment>
   </data>
   <data name="Country" xml:space="preserve">
@@ -213,8 +221,24 @@
     <value>Transaction</value>
     <comment>header</comment>
   </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transactions</value>
+    <comment>header</comment>
+  </data>
+  <data name="TransactionsIn" xml:space="preserve">
+    <value>Transactions In</value>
+    <comment>header</comment>
+  </data>
+  <data name="TransactionsOut" xml:space="preserve">
+    <value>Transactions Out</value>
+    <comment>header</comment>
+  </data>
   <data name="Wine" xml:space="preserve">
     <value>Wine</value>
+    <comment>header</comment>
+  </data>
+  <data name="Wines" xml:space="preserve">
+    <value>MyWines</value>
     <comment>header</comment>
   </data>
   <data name="Year" xml:space="preserve">

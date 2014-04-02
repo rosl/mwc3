@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Transaction.
+        /// </summary>
+        public static string AddTransaction {
+            get {
+                return ResourceManager.GetString("AddTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alcohol.
         /// </summary>
         public static string Alcohol {
@@ -93,6 +102,15 @@ namespace Resources {
         public static string BottleType {
             get {
                 return ResourceManager.GetString("BottleType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cellar.
+        /// </summary>
+        public static string Cellar {
+            get {
+                return ResourceManager.GetString("Cellar", resourceCulture);
             }
         }
         
@@ -277,11 +295,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transactions.
+        /// </summary>
+        public static string Transactions {
+            get {
+                return ResourceManager.GetString("Transactions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transactions In.
+        /// </summary>
+        public static string TransactionsIn {
+            get {
+                return ResourceManager.GetString("TransactionsIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transactions Out.
+        /// </summary>
+        public static string TransactionsOut {
+            get {
+                return ResourceManager.GetString("TransactionsOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wine.
         /// </summary>
         public static string Wine {
             get {
                 return ResourceManager.GetString("Wine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MyWines.
+        /// </summary>
+        public static string Wines {
+            get {
+                return ResourceManager.GetString("Wines", resourceCulture);
             }
         }
         
