@@ -1,0 +1,146 @@
+﻿@model MWC3.Models.Transaction
+
+@{
+    ViewBag.Title = "Transaction Out of the Cellar";
+}
+
+<h2>Out of the Cellar</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Transaction</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>Transaction</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TransactionTypeId, "TransactionTypeId", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.TransactionTypeId, (SelectList)this.ViewData["TransactionTypes"])
+                        @Html.ValidationMessageFor(model => model.TransactionTypeId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BottleTypeId, "BottleTypeId", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.BottleTypeId, (SelectList)this.ViewData["BottleTypes"])
+                        @Html.ValidationMessageFor(model => model.BottleTypeId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Quantity)
+                        @Html.ValidationMessageFor(model => model.Quantity)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Price)
+                        @Html.ValidationMessageFor(model => model.Price)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Date, new { @class = "datepicker" })
+                        @Html.ValidationMessageFor(model => model.Date)
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset id="wineFieldset">
+                <legend>Wine</legend>
+                <div class="form-group">
+                    @Html.Hidden("TransactionId")
+                    <label class="control-label col-md-2" for="SearchTransaction">Search</label>
+                    <div class="col-md-10">
+                        <input type="text" id="SearchTransaction" data-watermark="search at wine, producer, location" onfocus="this.value=''" />
+                        <button id="btAddWine" type="button">Add Wine</button>
+                    </div>
+                </div>
+                <div id="wineForm">
+                    <div class="form-group">
+                        <label for="wineName" class="control-label col-md-2">Name</label>
+                        <div class="col-md-10">
+                            <span id="wineName"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Type</label>
+                        <div class="col-md-10">
+                            Colour <span id="wineColor"></span> | Sparkling? <span id="isSparkling"></span> | Fortified? <span id="isFortified"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="grapes" class="control-label col-md-2">Grapes</label>
+                        <div class="col-md-10">
+                            <span id="grapes"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="producer" class="control-label col-md-2">Producer</label>
+                        <div class="col-md-10">
+                            <span id="producer"></span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Vintage</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Year, (SelectList)this.ViewData["Years"])
+                        @Html.ValidationMessageFor(model => model.Year)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Alcohol, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Alcohol)
+                        @Html.ValidationMessageFor(model => model.Alcohol)
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Distributor</legend>
+                <div class="form-group">
+                    <label for="distributor" class="control-label col-md-2">Distributor</label>
+                    <div class="col-md-10">
+                        <span id="distributor"></span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Opmerkingen</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Comment, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Comment)
+                        @Html.ValidationMessageFor(model => model.Comment)
+                    </div>
+                </div>
+            </fieldset>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="~/Scripts/Transactions/CreateOut.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap-datepicker.css" type="text/css" />
+}

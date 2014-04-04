@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<ul class="nav nav-tabs nav-justified">
+    <li class="active"><a href="#wines" data-toggle="tab" id="wines-tab">@Resources.Common.Wines</a></li>
+    <li><a href="#transactions_in" data-toggle="tab" id="transactions-in-tab">@Resources.Common.TransactionsIn</a></li>
+    <li><a href="#transactions_out" data-toggle="tab" id="transactions-out-tab">@Resources.Common.TransactionsOut</a></li>
+    <li><a href="#add_transaction" data-toggle="tab" id="add-transaction-tab">@Resources.Common.AddTransaction</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="wines">
+    </div>
+    <div class="tab-pane" id="transactions_in">
+    </div>
+    <div class="tab-pane" id="transactions_out">
+    </div>
+    <div class="tab-pane" id="add_transaction">
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="~/Content/bootstrap-datepicker.css" type="text/css" />
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+
