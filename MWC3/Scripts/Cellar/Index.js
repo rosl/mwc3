@@ -16,6 +16,8 @@ var Load = {
     AddTransaction: function () {
         $('#add_transaction').load("/Cellar/AddTransactionIn", function() {
             showHiddenFields();
+            $('.datepicker').datepicker();
+            useWatermark();
         });
         return true;
     },
