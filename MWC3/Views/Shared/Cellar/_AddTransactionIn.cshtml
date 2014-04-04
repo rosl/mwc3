@@ -19,29 +19,29 @@
                     <legend>Transaction details</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.TransactionTypeId, "Type", new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.TransactionTypeId, (SelectList)this.ViewData["TransactionTypes"])
+                        <div>
+                            @Html.DropDownListFor(model => model.TransactionTypeId, (SelectList)this.ViewData["TransactionTypes"], new { style = "width:auto;" })
                             @Html.ValidationMessageFor(model => model.TransactionTypeId)
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.BottleTypeId, "Bottle", new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.BottleTypeId, (SelectList)this.ViewData["BottleTypes"])
+                        <div>
+                            @Html.DropDownListFor(model => model.BottleTypeId, (SelectList)this.ViewData["BottleTypes"], new { style = "width:auto;" })
                             @Html.ValidationMessageFor(model => model.BottleTypeId)
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Quantity)
+                        <div>
+                            @Html.EditorFor(model => model.Quantity, new { @class = "textBoxx" })
                             @Html.ValidationMessageFor(model => model.Quantity)
                         </div>
                     </div>
                     @Html.HiddenFor(model => model.Price)
                     <div class="form-group">
                         @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div>
                             @Html.TextBox("priceInt", "0", new { style = "width: 50px; text-align:right;" }),
                             @Html.TextBox("priceCents", "00", new { style = "width: 20px;" })
                             @*@Html.ValidationMessageFor(model => model.Price)*@
@@ -50,7 +50,7 @@
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div>
                             @Html.EditorFor(model => model.Date, new { @class = "datepicker" })
                             @*@Html.ValidationMessageFor(model => model.Date)*@
                         </div>
@@ -61,7 +61,7 @@
                     <div class="form-group">
                         @Html.HiddenFor(model => model.WineId)
                         <label class="control-label col-md-2" for="SearchWine">Search</label>
-                        <div class="col-md-10">
+                        <div>
                             <input type="text" id="SearchWine" data-watermark="search at wine, producer, location" onfocus="this.value=''" />
                             <button id="btAddWine" type="button">Add Wine</button>
                         </div>
@@ -69,25 +69,25 @@
                     <div id="wineForm">
                         <div class="form-group">
                             <label for="wineName" class="control-label col-md-2">Name</label>
-                            <div class="col-md-10">
+                            <div>
                                 <span id="wineName"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2">Type</label>
-                            <div class="col-md-10">
+                            <div>
                                 Colour <span id="wineColor"></span> | Sparkling? <span id="isSparkling"></span> | Fortified? <span id="isFortified"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="grapes" class="control-label col-md-2">Grapes</label>
-                            <div class="col-md-10">
+                            <div>
                                 <span id="grapes"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="producer" class="control-label col-md-2">Producer</label>
-                            <div class="col-md-10">
+                            <div>
                                 <span id="producer"></span>
                             </div>
                         </div>
@@ -97,14 +97,14 @@
                     <legend>Wine details</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div>
                             @Html.DropDownListFor(model => model.Year, (SelectList)this.ViewData["Years"], new { @class = "auto-width" })
                             @Html.ValidationMessageFor(model => model.Year)
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Alcohol, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div>
                             @Html.TextBoxFor(model => model.Alcohol, new { @class = "auto-width" })
                             &nbsp;&#37;
                         </div>
@@ -115,13 +115,13 @@
                     <div class="form-group">
                         @Html.HiddenFor(model => model.BusinessId)
                         <label class="control-label col-md-2" for="SearchDistributor">Search</label>
-                        <div class="col-md-10">
+                        <div>
                             <input type="text" id="SearchDistributor" data-watermark="search at name" onfocus="this.value=''" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="distributor" class="control-label col-md-2">Distributor</label>
-                        <div class="col-md-10">
+                        <div>
                             <span id="distributor"></span>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                     <legend>Opmerkingen</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Comment, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        <div>
                             @Html.EditorFor(model => model.Comment)
                             @Html.ValidationMessageFor(model => model.Comment)
                         </div>
