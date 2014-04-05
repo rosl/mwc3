@@ -60,11 +60,13 @@
                     <legend>Wine</legend>
                     <div class="form-group">
                         @Html.HiddenFor(model => model.WineId)
-                        <label class="control-label col-md-2" for="SearchWine">Search</label>
-                        <div>
-                            <input type="text" id="SearchWine" data-watermark="search at wine, producer, location" onfocus="this.value=''" />
-                            <button id="btAddWine" type="button">Add Wine</button>
-                        </div>
+                        <dl class="dl-horizontal">
+                            <dt>@Resources.Common.Search</dt>
+                            <dd>
+                                <input type="text" id="SearchWine" data-watermark="search at wine, producer, location" onfocus="this.value=''" />
+                                <button id="btAddWine" type="button">Add Wine</button>
+                            </dd>
+                        </dl>
                     </div>
                     <div id="wineForm">
                         <dl class="dl-horizontal">
@@ -81,33 +83,6 @@
                             <dt>@Resources.Common.Grapes</dt>
                             <dd id="grapes"></dd>
                         </dl>
-
-
-
-                        @*<div class="form-group">
-                            <label for="wineName" class="control-label col-md-2">Name</label>
-                            <div>
-                                <span id="wineName"></span>
-                            </div>
-                        </div>*@
-                        @*<div class="form-group">
-                            <label class="control-label col-md-2">Type</label>
-                            <div>
-                                Colour <span id="wineColor"></span> | Sparkling? <span id="isSparkling"></span> | Fortified? <span id="isFortified"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="grapes" class="control-label col-md-2">Grapes</label>
-                            <div>
-                                <span id="grapes"></span>
-                            </div>
-                        </div>*@
-                        @*<div class="form-group">
-                            <label for="producer" class="control-label col-md-2">Producer</label>
-                            <div>
-                                <span id="producer"></span>
-                            </div>
-                        </div>*@
                     </div>
                 </fieldset>
                 <fieldset>

@@ -261,8 +261,20 @@
     <value>Grapes</value>
     <comment>header</comment>
   </data>
+  <data name="False" xml:space="preserve">
+    <value>No</value>
+    <comment>header</comment>
+  </data>
   <data name="GrapeOrGrapes" xml:space="preserve">
     <value>Grape(s)</value>
+    <comment>header</comment>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+    <comment>header</comment>
+  </data>
+  <data name="True" xml:space="preserve">
+    <value>Yes</value>
     <comment>header</comment>
   </data>
 </root>

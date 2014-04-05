@@ -205,6 +205,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string False {
+            get {
+                return ResourceManager.GetString("False", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fortified.
         /// </summary>
         public static string Fortified {
@@ -286,6 +295,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sparkling.
         /// </summary>
         public static string Sparkling {
@@ -363,6 +381,15 @@ namespace Resources {
         public static string TransactionsOut {
             get {
                 return ResourceManager.GetString("TransactionsOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string True {
+            get {
+                return ResourceManager.GetString("True", resourceCulture);
             }
         }
         
