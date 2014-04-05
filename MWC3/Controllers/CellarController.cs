@@ -107,6 +107,19 @@ namespace MWC3.Controllers
             return this.PartialView("Cellar/_SaveTransaction");
         }
 
+        public PartialViewResult TransactionDetails(int transactionId)
+        {
+            var transaction = Service.GetTransactionById(transactionId);
+
+            // check if this transaction belongs to this user
+            var userId = this.GetUserId();
+            if (transaction.UserId != userId)
+            {
+                transaction = new Transaction();
+            }
+
+            return this.PartialView("Cellar/_TransactionDetails", transaction);
+        }
         ////
         //// GET: /Cellar/Details/5
         //public ActionResult Details(int id)

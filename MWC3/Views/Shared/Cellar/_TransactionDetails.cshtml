@@ -1,0 +1,134 @@
+﻿@model MWC3.Models.Transaction
+
+@{
+    ViewBag.Title = "Transaction details";
+}
+
+<div>
+    <hr />
+    <h4>Transaction</h4>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BottleType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BottleType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Business.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Business.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransactionType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransactionType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+    </dl>
+    <hr />
+    <h4>Wine</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Wine.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wine.Name)
+        </dd>
+
+        <dt>
+            @Resources.Common.Year
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Resources.Common.Alcohol
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Alcohol)&nbsp;&#37;
+        </dd>
+
+
+        <dt>
+            @Resources.Common.Producer
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Wine.Business.Name)
+        </dd>
+
+        <dt></dt>
+        <dd>
+            @Html.DisplayFor(model => model.Wine.Business.Address)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wine.Business.PostalCode),
+            @Html.DisplayFor(model => model.Wine.Business.City)
+        </dd>
+
+        <dt>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Wine.Business.Country.Name)
+        </dd>
+
+
+        <dt></dt>
+        <dd>@Html.DisplayFor(model => model.Wine.Business.Country.Name)</dd>
+    </dl>
+    <hr />
+</div>
+
+<p>
+    @if (Model.TransactionType.Multiplier > 0)
+    {
+        <a href="#" onclick="Load.TransactionsIn()">Back to List</a>
+    }
+    else
+    {
+        <a href="#" onclick="Load.TransactionsOut()">Back to List</a>
+    }
+</p>
+

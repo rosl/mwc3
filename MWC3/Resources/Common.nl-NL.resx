@@ -245,4 +245,24 @@
     <value>Jaar</value>
     <comment>header</comment>
   </data>
+  <data name="Color" xml:space="preserve">
+    <value>Kleur</value>
+    <comment>header</comment>
+  </data>
+  <data name="Fortified" xml:space="preserve">
+    <value>Versterkte wijn</value>
+    <comment>header</comment>
+  </data>
+  <data name="Grapes" xml:space="preserve">
+    <value>Druiven</value>
+    <comment>header</comment>
+  </data>
+  <data name="Sparkling" xml:space="preserve">
+    <value>Mousserend</value>
+    <comment>header</comment>
+  </data>
+  <data name="GrapeOrGrapes" xml:space="preserve">
+    <value>Drui(f)(ven)</value>
+    <comment>header</comment>
+  </data>
 </root>

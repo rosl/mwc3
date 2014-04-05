@@ -12,6 +12,11 @@
     {
         private readonly ApplicationDbContext db = new ApplicationDbContext();
 
+        public Transaction GetTransactionById(int id)
+        {
+            var transaction = this.db.Transactions.Find(id);
+            return transaction;
+        }
 
         public IEnumerable<CellarWineViewModel> GetWinesByUser(string userId)
         {
@@ -190,6 +195,7 @@
                 cellarTransaction.DistributorCountryId = transaction.Business.CountryId;
             }
             cellarTransaction.Date = transaction.Date.Date;
+            cellarTransaction.TransactionId = transaction.Id;
             cellarTransaction.TransactionTypeId = transaction.TransactionTypeId;
             cellarTransaction.TransactionTypeName = transaction.TransactionType.Name;
             cellarTransaction.Quantity = transaction.Quantity;

@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color.
+        /// </summary>
+        public static string Color {
+            get {
+                return ResourceManager.GetString("Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Country.
         /// </summary>
         public static string Country {
@@ -196,6 +205,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fortified.
+        /// </summary>
+        public static string Fortified {
+            get {
+                return ResourceManager.GetString("Fortified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grape(s).
+        /// </summary>
+        public static string GrapeOrGrapes {
+            get {
+                return ResourceManager.GetString("GrapeOrGrapes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grapes.
+        /// </summary>
+        public static string Grapes {
+            get {
+                return ResourceManager.GetString("Grapes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {
@@ -246,6 +282,15 @@ namespace Resources {
         public static string Region {
             get {
                 return ResourceManager.GetString("Region", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sparkling.
+        /// </summary>
+        public static string Sparkling {
+            get {
+                return ResourceManager.GetString("Sparkling", resourceCulture);
             }
         }
         

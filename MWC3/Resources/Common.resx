@@ -245,4 +245,24 @@
     <value>Year</value>
     <comment>header</comment>
   </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
+    <comment>header</comment>
+  </data>
+  <data name="Fortified" xml:space="preserve">
+    <value>Fortified</value>
+    <comment>header</comment>
+  </data>
+  <data name="Sparkling" xml:space="preserve">
+    <value>Sparkling</value>
+    <comment>header</comment>
+  </data>
+  <data name="Grapes" xml:space="preserve">
+    <value>Grapes</value>
+    <comment>header</comment>
+  </data>
+  <data name="GrapeOrGrapes" xml:space="preserve">
+    <value>Grape(s)</value>
+    <comment>header</comment>
+  </data>
 </root>

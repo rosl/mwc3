@@ -24,7 +24,7 @@ var Load = {
             Load.Wines();
             Load.Distributors();
             $('#WineId').change(function () {
-                useWatermark();
+                // useWatermark();
                 $('#SearchWine').blur();
                 Show.WineForm();
                 Load.Wine();
@@ -36,6 +36,10 @@ var Load = {
         $('#transactions_in').load("/Cellar/GetTransactionsIn");
         return true;
     },
+    TransactionDetails: function (transactionId) {
+        $('#transactions_in').load("/Cellar/TransactionDetails", { transactionId: transactionId });
+        return true;
+    },
     TransactionsOut: function () {
         $('#transactions_out').load("/Cellar/GetTransactionsOut");
         return true;
@@ -44,6 +48,7 @@ var Load = {
         $('#wines').load("/Cellar/GetTransactionsByWineId", { wineId: wineId });
         return true;
     },
+
     Distributors: function () {
         $.getJSON("/search/distributor", function (receivedData) {
             var distributors = $.map(receivedData, function (value) { return { value: value.Value, data: value.Key }; });
@@ -69,9 +74,12 @@ var Load = {
             var wines = $.map(receivedData, function (value) { return { value: value.Value, data: value.Key }; });
             $('#SearchWine').autocomplete({
                 lookup: wines,
+                minChars: 3,
+                width: 450,
                 onSelect: function (suggestion) {
                     $('#WineId').val(suggestion.data);
                     $('#WineId').change();
+                    $('#SearchWine').val('');
                     // alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
                 }
             });

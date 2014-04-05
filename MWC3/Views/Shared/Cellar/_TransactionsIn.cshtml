@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<table class="table">
+<table class="table" style="clear: both">
     <tr>
         <th>#</th>
         <th>
@@ -47,6 +47,7 @@
         <th>
             @Html.DisplayName(Resources.Common.Date)
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -94,6 +95,7 @@
             <td>
                 @item.Date.ToShortDateString()
             </td>
+            <td><a href="#" onclick="Load.TransactionDetails(@item.TransactionId)">Details</a></td>
         </tr>
     }
 
