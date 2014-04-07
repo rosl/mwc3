@@ -62,8 +62,8 @@
                         {
                             id = wine.Id,
                             name = wine.Name,
-                            isFortified = wine.IsFortified,
-                            isSparkling = wine.IsSparkling,
+                            isFortified = wine.IsFortified? Resources.Common.Yes: Resources.Common.No,
+                            isSparkling = wine.IsSparkling ? Resources.Common.Yes : Resources.Common.No,
                             producer = wine.Business,
                             grapes = wine.Grapes.Select(g => g.Name),
                             color = wine.WineColor.Name

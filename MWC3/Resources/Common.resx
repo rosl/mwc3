@@ -269,6 +269,9 @@
     <value>Grape(s)</value>
     <comment>header</comment>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
     <comment>header</comment>
@@ -276,5 +279,8 @@
   <data name="True" xml:space="preserve">
     <value>Yes</value>
     <comment>header</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

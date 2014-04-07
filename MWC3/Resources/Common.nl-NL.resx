@@ -269,6 +269,9 @@
     <value>Drui(f)(ven)</value>
     <comment>header</comment>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>Nee</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Zoeken</value>
     <comment>header</comment>
@@ -276,5 +279,8 @@
   <data name="True" xml:space="preserve">
     <value>Ja</value>
     <comment>header</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
   </data>
 </root>

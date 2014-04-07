@@ -12,29 +12,27 @@
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                <h4>Transaction</h4>
-                <hr />
                 @Html.ValidationSummary(true)
                 <fieldset>
-                    <legend>Transaction details</legend>
+                    <legend>Transaction</legend>
                     <div class="form-group">
                         @Html.LabelFor(model => model.TransactionTypeId, "Type", new { @class = "control-label col-md-2" })
                         <div>
-                            @Html.DropDownListFor(model => model.TransactionTypeId, (SelectList)this.ViewData["TransactionTypes"], new { style = "width:auto;" })
+                            @Html.DropDownListFor(model => model.TransactionTypeId, (SelectList)ViewData["TransactionTypes"], new { @class = "form-control", style = "width:auto;" })
                             @Html.ValidationMessageFor(model => model.TransactionTypeId)
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.BottleTypeId, "Bottle", new { @class = "control-label col-md-2" })
                         <div>
-                            @Html.DropDownListFor(model => model.BottleTypeId, (SelectList)this.ViewData["BottleTypes"], new { style = "width:auto;" })
+                            @Html.DropDownListFor(model => model.BottleTypeId, (SelectList)ViewData["BottleTypes"], new { @class = "form-control", style = "width:auto;" })
                             @Html.ValidationMessageFor(model => model.BottleTypeId)
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
                         <div>
-                            @Html.EditorFor(model => model.Quantity, new { @class = "textBoxx" })
+                            @Html.EditorFor(model => model.Quantity, new { @class = "form-control", style="width: auto;" })
                             @Html.ValidationMessageFor(model => model.Quantity)
                         </div>
                     </div>
@@ -42,8 +40,8 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
                         <div>
-                            @Html.TextBox("priceInt", "0", new { style = "width: 50px; text-align:right;" }),
-                            @Html.TextBox("priceCents", "00", new { style = "width: 20px;" })
+                            @Html.TextBox("priceInt", "0", new { @class = "form-control, form-inline", style = "width: 50px; text-align:right;" }),
+                            @Html.TextBox("priceCents", "00", new { @class = "form-control, form-inline", style = "width: 20px;" })
                             @*@Html.ValidationMessageFor(model => model.Price)*@
                         </div>
                     </div>
@@ -51,38 +49,38 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
                         <div>
-                            @Html.EditorFor(model => model.Date, new { @class = "datepicker" })
+                            @Html.EditorFor(model => model.Date, new { @class = "form-control, datepicker" })
                             @*@Html.ValidationMessageFor(model => model.Date)*@
                         </div>
                     </div>
                 </fieldset>
                 <fieldset id="wineFieldset">
                     <legend>Wine</legend>
+                    @Html.HiddenFor(model => model.WineId)
                     <div class="form-group">
-                        @Html.HiddenFor(model => model.WineId)
-                        <dl class="dl-horizontal">
-                            <dt>@Resources.Common.Search</dt>
-                            <dd>
-                                <input type="text" id="SearchWine" data-watermark="search at wine, producer, location" onfocus="this.value=''" />
-                                <button id="btAddWine" type="button">Add Wine</button>
-                            </dd>
-                        </dl>
-                    </div>
-                    <div id="wineForm">
-                        <dl class="dl-horizontal">
-                            <dt>@Resources.Common.Wine</dt>
-                            <dd id="wineName"></dd>
-                            <dt>@Resources.Common.Producer</dt>
-                            <dd id="producer"></dd>
-                            <dt>@Resources.Common.Color</dt>
-                            <dd id="wineColor"></dd>
-                            <dt>@Resources.Common.Sparkling?</dt>
-                            <dd id="isSparkling"></dd>
-                            <dt>@Resources.Common.Fortified?</dt>
-                            <dd id="isFortified"></dd>
-                            <dt>@Resources.Common.Grapes</dt>
-                            <dd id="grapes"></dd>
-                        </dl>
+                        @Html.Label("SearchWine", @Resources.Common.Search, new { @class = "control-label col-md-2" })
+                        <div>
+                            <input type="text" id="SearchWine" class="form-control" placeholder="search at wine, producer, location" onfocus="this.value=''" />
+                            <button id="btAddWine" class="form-inline" type="button">
+                                    Add Wine
+                                </button>
+                        </div>
+                        <div id="wineForm">
+                            <dl class="dl-horizontal">
+                                <dt>@Resources.Common.Wine</dt>
+                                <dd id="wineName"></dd>
+                                <dt>@Resources.Common.Producer</dt>
+                                <dd id="producer"></dd>
+                                <dt>@Resources.Common.Color</dt>
+                                <dd id="wineColor"></dd>
+                                <dt>@Resources.Common.Sparkling?</dt>
+                                <dd id="isSparkling"></dd>
+                                <dt>@Resources.Common.Fortified?</dt>
+                                <dd id="isFortified"></dd>
+                                <dt>@Resources.Common.Grapes</dt>
+                                <dd id="grapes"></dd>
+                            </dl>
+                        </div>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -90,14 +88,14 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
                         <div>
-                            @Html.DropDownListFor(model => model.Year, (SelectList)this.ViewData["Years"], new { @class = "auto-width" })
+                            @Html.DropDownListFor(model => model.Year, (SelectList)this.ViewData["Years"], new { @class = "form-control", style = "width:auto;" })
                             @Html.ValidationMessageFor(model => model.Year)
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Alcohol, new { @class = "control-label col-md-2" })
                         <div>
-                            @Html.TextBoxFor(model => model.Alcohol, new { @class = "auto-width" })
+                            @Html.TextBoxFor(model => model.Alcohol, new { @class = "form-control, form-inline", style = "width:auto;" })
                             &nbsp;&#37;
                         </div>
                     </div>
@@ -108,7 +106,7 @@
                         @Html.HiddenFor(model => model.BusinessId)
                         <label class="control-label col-md-2" for="SearchDistributor">Search</label>
                         <div>
-                            <input type="text" id="SearchDistributor" data-watermark="search at name" onfocus="this.value=''" />
+                            <input type="text" id="SearchDistributor" class="form-control" placeholder="search at name" onfocus="this.value=''" />
                         </div>
                     </div>
                     <div class="form-group">
