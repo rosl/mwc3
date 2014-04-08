@@ -283,4 +283,8 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+    <comment>header</comment>
+  </data>
 </root>

@@ -17,14 +17,12 @@ var Load = {
         $('#add_transaction').load("/Cellar/AddTransactionIn", function () {
             // showHiddenFields();
             Hide.WineForm();
-            $('.datepicker').datepicker();
-            useWatermark();
+            Render.DatePicker();
             $('#priceCents').change(function () { AddTransactionIn.NewPrice(); });
             $('#priceInt').change(function () { AddTransactionIn.NewPrice(); });
             Load.Wines();
             Load.Distributors();
             $('#WineId').change(function () {
-                // useWatermark();
                 $('#SearchWine').blur();
                 Show.WineForm();
                 Load.Wine();
@@ -98,9 +96,17 @@ var Load = {
     },
 };
 
+
+
 var Save = {};
 
-var Render = {};
+var Render = {
+    DatePicker: function () {
+        $('.datepicker').datepicker();
+        $('.datepicker').addClass('form-control');
+        $('.datepicker').css("width", "150px");
+    }
+};
 
 var Show = {
     WineForm: function () {
@@ -121,12 +127,7 @@ var Click = {
         $('#add-transaction-tab').click(function () { Load.AddTransaction(); });
         $('#transactions-in-tab').click(function () { Load.TransactionsIn(); });
         $('#transactions-out-tab').click(function () { Load.TransactionsOut(); });
-    },
-    //ToWines: function () { Load.CurrentWines(); },
-    //ToTransactions: function () { Load.Transactions(); },
-    //ToTransactionsIn: function () { Load.TransactionsIn(); },
-    //ToTransactionsOut: function () { Load.TransactionsOut(); },
-
+    }
 };
 
 var AddTransactionIn = {
