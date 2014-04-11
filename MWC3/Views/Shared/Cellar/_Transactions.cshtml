@@ -3,7 +3,7 @@
 @{
     var counter = 0;
 }
-
+<p><a href="#" onclick="LoadPartialView.CurrentWines()">Back to List</a></p>
 <table class="table">
     <tr>
         <th>
@@ -24,7 +24,7 @@
             <br />
             @Html.DisplayName(firstItem.Year.ToString(CultureInfo.InvariantCulture))
             <br />
-            @Html.DisplayName(firstItem.Alcohol.ToString(CultureInfo.InvariantCulture))&nbsp;&#37;
+            @Html.DisplayName(firstItem.Alcohol.ToString("##.##"))&nbsp;&#37;
         </td>
         <td>
             @Html.DisplayName(firstItem.ProducerName)<br />
@@ -34,7 +34,7 @@
     </tr>
 </table>
 
-<h4>In</h4>
+<h4>@Resources.Common.TransactionsIn</h4>
 <table class="table">
     <tr>
         <th>#</th>
@@ -50,7 +50,7 @@
         <th class="number">
             @Html.DisplayName(Resources.Common.Quantity)
         </th>
-        <th class ="currency">
+        <th class="currency">
             @Html.DisplayName(Resources.Common.Price)
         </th>
         <th class="currency">
@@ -67,36 +67,36 @@
         {
             counter++;
 
-    <tr>
-        <td>
-            @counter
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TransactionTypeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DistributorName)<br />
-            @Html.DisplayFor(modelItem => item.DistributorCity)<br />
-            @Html.DisplayFor(modelItem => item.DistributorCountry)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BottleTypeName)
-        </td>
-        <td class="number">
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td class="currency">
-            &euro;
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td class="currency">
-            &euro;
-            @Html.DisplayFor(modelItem => item.TotalPrice)
-        </td>
-        <td>
-            @item.Date.ToShortDateString()
-        </td>
-    </tr>
+            <tr>
+                <td>
+                    @counter
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransactionTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DistributorName)<br />
+                    @Html.DisplayFor(modelItem => item.DistributorCity)<br />
+                    @Html.DisplayFor(modelItem => item.DistributorCountry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BottleTypeName)
+                </td>
+                <td class="number">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td class="currency">
+                    &euro;
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td class="currency">
+                    &euro;
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @item.Date.ToShortDateString()
+                </td>
+            </tr>
         }
     }
 
@@ -106,7 +106,7 @@
     counter = 0;
 }
 
-<h4>Out</h4>
+<h4>@Resources.Common.TransactionsOut</h4>
 <table class="table">
     <tr>
         <th>#</th>
@@ -165,5 +165,4 @@
     }
 
 </table>
-
-<a href="#" onclick="Load.CurrentWines()">Back to List</a>
+<p><a href="#" onclick="LoadPartialView.CurrentWines()">Back to List</a></p>

@@ -32,7 +32,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
                         <div>
-                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", style = "width:100px;" } } )
+                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", style = "width:100px;" } })
                             @Html.ValidationMessageFor(model => model.Quantity)
                         </div>
                     </div>
@@ -65,26 +65,49 @@
                                 Add Wine
                             </button>
                         </div>
-                        <div id="wineForm">
-                            <dl class="dl-horizontal">
-                                <dt>@Resources.Common.Wine</dt>
-                                <dd id="wineName"></dd>
-                                <dt>@Resources.Common.Producer</dt>
-                                <dd id="producer"></dd>
-                                <dt>@Resources.Common.Color</dt>
-                                <dd id="wineColor"></dd>
-                                <dt>@Resources.Common.Sparkling?</dt>
-                                <dd id="isSparkling"></dd>
-                                <dt>@Resources.Common.Fortified?</dt>
-                                <dd id="isFortified"></dd>
-                                <dt>@Resources.Common.Grapes</dt>
-                                <dd id="grapes"></dd>
-                            </dl>
-                        </div>
                     </div>
                 </fieldset>
                 <fieldset>
                     <legend>Wine details</legend>
+                    <div id="wineForm">
+                        <div class="form-group">
+                            @Html.Label(Resources.Common.Wine, new { @class = "control-label col-md-3" })
+                            <div>
+                                <span id="wineName" class="form-control"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(Resources.Common.Producer, new { @class = "control-label col-md-3" })
+                            <div>
+                                <span id="producer" class="form-control"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(Resources.Common.Color, new { @class = "control-label col-md-3" })
+                            <div>
+                                <span id="wineColor" class="form-control"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(Resources.Common.Sparkling, new { @class = "control-label col-md-3" })
+                            <div>
+                                <span id="isSparkling" class="form-control"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(Resources.Common.Fortified, new { @class = "control-label col-md-3" })
+                            <div>
+                                <span id="isFortified" class="form-control"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(Resources.Common.Grapes, new { @class = "control-label col-md-3" })
+                            <div>
+                                <span id="grapes" class="form-control"></span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.Year, new { @class = "control-label col-md-2" })
                         <div>
@@ -101,7 +124,7 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>Distributor</legend>
+                    <legend>@Resources.Common.Distributor</legend>
                     <div class="form-group">
                         @Html.HiddenFor(model => model.BusinessId)
                         <label class="control-label col-md-2" for="SearchDistributor">Search</label>
@@ -109,10 +132,12 @@
                             <input type="text" id="SearchDistributor" class="form-control" placeholder="search at name" onfocus="this.value=''" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="distributor" class="control-label col-md-2">Distributor</label>
-                        <div>
-                            <span id="distributor"></span>
+                    <div id="distributorForm">
+                        <div class="form-group">
+                            <label for="distributor" class="control-label col-md-3">Distributor</label>
+                            <div>
+                                <span id="distributor" class="form-control"></span>
+                            </div>
                         </div>
                     </div>
                 </fieldset>

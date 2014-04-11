@@ -1,6 +1,6 @@
 ﻿var Index = {
     Initialize: function () {
-        Load.CurrentWines();
+        LoadPartialView.CurrentWines();
         Click.ToTabs();
 
     }
@@ -8,7 +8,7 @@
 
 };
 
-var Load = {
+var LoadPartialView = {
     CurrentWines: function () {
         $('#wines').load("/Cellar/GetCurrentWines");
         return true;
@@ -17,6 +17,7 @@ var Load = {
         $('#add_transaction').load("/Cellar/AddTransactionIn", function () {
             // showHiddenFields();
             Hide.WineForm();
+            Hide.DistributorForm();
             Render.DatePicker();
             $('#priceCents').change(function () { AddTransactionIn.NewPrice(); });
             $('#priceInt').change(function () { AddTransactionIn.NewPrice(); });
@@ -27,6 +28,12 @@ var Load = {
                 Show.WineForm();
                 Load.Wine();
             });
+            $('#BusinessId').change(function () {
+                $('#SearchDistributor').blur();
+                Show.DistributorForm();
+                Load.Distributor();
+            });
+
         });
         return true;
     },
@@ -47,15 +54,23 @@ var Load = {
         return true;
     },
 
+};
+
+
+var Load = {
+
     Distributors: function () {
         $.getJSON("/search/distributor", function (receivedData) {
             var distributors = $.map(receivedData, function (value) { return { value: value.Value, data: value.Key }; });
             $('#SearchDistributor').autocomplete({
                 lookup: distributors,
+                minChars: 3,
+                width: 450,
                 onSelect: function (suggestion) {
                     $('#BusinessId').val(suggestion.data);
                     $('#BusinessId').change();
-                    //alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                    $('#SearchDistributor').val('');
+                    console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
                 }
             });
         });
@@ -78,7 +93,7 @@ var Load = {
                     $('#WineId').val(suggestion.data);
                     $('#WineId').change();
                     $('#SearchWine').val('');
-                    // alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                    console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
                 }
             });
         });
@@ -111,6 +126,9 @@ var Render = {
 var Show = {
     WineForm: function () {
         $('#wineForm').show();
+    },
+    DistributorForm: function () {
+        $('#distributorForm').show();
     }
 };
 
@@ -118,15 +136,18 @@ var Hide = {
     WineForm: function () {
         $('#wineForm').hide();
     },
+    DistributorForm: function () {
+        $('#distributorForm').hide();
+    }
 };
 
 
 var Click = {
     ToTabs: function () {
-        $('#wines-tab').click(function () { Load.CurrentWines(); });
-        $('#add-transaction-tab').click(function () { Load.AddTransaction(); });
-        $('#transactions-in-tab').click(function () { Load.TransactionsIn(); });
-        $('#transactions-out-tab').click(function () { Load.TransactionsOut(); });
+        $('#wines-tab').click(function () { LoadPartialView.CurrentWines(); });
+        $('#add-transaction-tab').click(function () { LoadPartialView.AddTransaction(); });
+        $('#transactions-in-tab').click(function () { LoadPartialView.TransactionsIn(); });
+        $('#transactions-out-tab').click(function () { LoadPartialView.TransactionsOut(); });
     }
 };
 

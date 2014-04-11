@@ -71,7 +71,7 @@
             <td class="currency">&euro; 
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
-            <td><a href="#" onclick="Load.TransactionsByWine(@item.WineId)">Details</a></td>
+            <td><a href="#" onclick="LoadPartialView.TransactionsByWine(@item.WineId)">Details</a></td>
         </tr>
     }
 
