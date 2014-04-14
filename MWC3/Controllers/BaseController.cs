@@ -79,7 +79,7 @@
             //var currentActionName = (string)filterContext.RouteData.Values["action"];
         }
 
-        private static void LogException(Exception e)
+        public static void LogException(Exception e)
         {
             var context = System.Web.HttpContext.Current;
             ErrorLog.GetDefault(context).Log(new Error(e, context));

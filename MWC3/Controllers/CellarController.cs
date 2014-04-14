@@ -81,8 +81,6 @@ namespace MWC3.Controllers
                 Quantity = 1
             };
 
-            // ViewBag.BusinessId = new SelectList(Db.Businesses, "Id", "Name");
-            // ViewBag.WineId = new SelectList(Db.Wines, "Id", "Name");
             ViewBag.PriceInt = Math.Floor(transaction.Price);
             var priceCents = ("0"
                               + (transaction.Price - Math.Floor(transaction.Price) * 100).ToString(
@@ -95,6 +93,28 @@ namespace MWC3.Controllers
 
             return this.PartialView("Cellar/_AddTransactionIn", transaction);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult CreateIn([Bind(Include = "Id,Quantity,TransactionTypeId,BusinessId,BottleTypeId,WineId,Year,Price,Date,Comment")] Transaction transaction)
+        {
+            if (ModelState.IsValid)
+            {
+
+                transaction.UserId = this.GetUserId();
+                transaction.AddedBy = this.GetUserName();
+                transaction.TimeStamp = DateTime.Now;
+
+                Db.Transactions.Add(transaction);
+                Db.SaveChanges();
+                return new JsonResult();;
+            }
+
+            return new JsonResult();
+        }
+
+
+
 
         public PartialViewResult AddTransactionOut()
         {

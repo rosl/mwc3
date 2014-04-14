@@ -53,10 +53,8 @@ namespace MWC3.Controllers
                     await SignInAsync(user, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid username or password.");
-                }
+                this.ModelState.AddModelError("", "Invalid username or password.");
+                BaseController.LogException(new Exception("Invalid username or password."));
             }
 
             // If we got this far, something failed, redisplay form
