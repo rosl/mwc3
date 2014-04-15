@@ -96,7 +96,7 @@ namespace MWC3.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult CreateIn([Bind(Include = "Id,Quantity,TransactionTypeId,BusinessId,BottleTypeId,WineId,Year,Price,Date,Comment")] Transaction transaction)
+        public JsonResult SaveTransaction([Bind(Include = "Id,Quantity,TransactionTypeId,BusinessId,BottleTypeId,WineId,Year,Price,Date,Comment")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
@@ -107,24 +107,15 @@ namespace MWC3.Controllers
 
                 Db.Transactions.Add(transaction);
                 Db.SaveChanges();
-                return new JsonResult();;
+                return this.Json(true);
             }
 
-            return new JsonResult();
+            return this.Json(false);
         }
-
-
-
 
         public PartialViewResult AddTransactionOut()
         {
             return this.PartialView("Cellar/_AddTransactionIn");
-        }
-
-        [HttpPost]
-        public PartialViewResult SaveTransaction()
-        {
-            return this.PartialView("Cellar/_SaveTransaction");
         }
 
         public PartialViewResult TransactionDetails(int transactionId)
@@ -140,84 +131,6 @@ namespace MWC3.Controllers
 
             return this.PartialView("Cellar/_TransactionDetails", transaction);
         }
-        ////
-        //// GET: /Cellar/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
-
-        ////
-        //// GET: /Cellar/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        ////
-        //// POST: /Cellar/Create
-        //[HttpPost]
-        //public ActionResult Create(FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add insert logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        ////
-        //// GET: /Cellar/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
-
-        ////
-        //// POST: /Cellar/Edit/5
-        //[HttpPost]
-        //public ActionResult Edit(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        ////
-        //// GET: /Cellar/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        ////
-        //// POST: /Cellar/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
 
         protected override void Dispose(bool disposing)
         {
