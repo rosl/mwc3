@@ -1,6 +1,4 @@
-﻿
-
-namespace MWC3.Controllers
+﻿namespace MWC3.Controllers
 {
     using System;
     using System.Globalization;
