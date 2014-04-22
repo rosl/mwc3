@@ -17,7 +17,6 @@
             Service = new CellarService();
         }
 
-
         //
         // GET: /Cellar/
         public ActionResult Index()
